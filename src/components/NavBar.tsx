@@ -65,10 +65,10 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
               transition: "all 0.52s cubic-bezier(0.29,1.44,0.53,1.02)",
             }}
           >
-            <div className="font-bebas text-2xl sm:text-3xl tracking-wider text-white leading-none uppercase mb-0.5">
+            <div className="font-bebas text-2xl sm:text-3xl tracking-wider gradient-text-strong uppercase leading-none mb-0.5">
               PORTFOLIO
             </div>
-            <div className="font-bebas text-5xl sm:text-6xl tracking-[0.18em] gradient-text-strong mt-0 uppercase">
+            <div className="font-bebas text-5xl sm:text-6xl tracking-[0.18em] text-white mt-0 uppercase leading-none">
               ADWAITH
             </div>
           </div>
@@ -79,7 +79,7 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
         <div className="flex items-center justify-between px-8 py-2 max-w-7xl mx-auto h-[70px]">
           <span
             className={cn(
-              "text-3xl sm:text-4xl font-bebas gradient-text-strong tracking-[0.11em] select-none uppercase transition-transform duration-[400ms] ",
+              "text-3xl sm:text-4xl font-bebas text-white tracking-[0.11em] select-none uppercase transition-transform duration-[400ms] ",
               "scale-100 opacity-100"
             )}
             style={{ transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)" }}
@@ -138,3 +138,4 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
 };
 
 export default NavBar;
+
