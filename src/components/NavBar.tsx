@@ -1,4 +1,5 @@
-import { Home, FileText, Mail } from "lucide-react";
+
+import { Home, FileText, Mail, Menu } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +18,7 @@ type NavBarProps = {
 const NavBar = ({ burstAnim = false }: NavBarProps) => {
   const [active, setActive] = useState("home");
   const [collapsed, setCollapsed] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const navBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,12 +29,24 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close mobile menu on window resize if above sm breakpoint
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 640 && showMobileMenu) {
+        setShowMobileMenu(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [showMobileMenu]);
+
   const onNav = (id: string) => {
     setActive(id);
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+    setShowMobileMenu(false); // close menu on mobile after navigate
   };
 
   const NAV_EXPANDED_HEIGHT = 170;
@@ -99,13 +113,61 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
         </div>
       )}
 
-      {/* Nav menu: always */}
+      {/* Hamburger menu for mobile screens: show ONLY when not collapsed and for small screens */}
+      <button
+        className={cn(
+          "sm:hidden absolute z-[60] transition-all duration-200 rounded-xl p-2 flex items-center justify-center",
+          !collapsed
+            ? "bottom-3 right-3 bg-black/70 shadow-lg border border-zinc-700"
+            : "hidden"
+        )}
+        style={{
+          // Soft gradient border for the icon on mobile
+          background: "linear-gradient(120deg,#171717cc 80%,#ff379640 100%)",
+        }}
+        aria-label={showMobileMenu ? "Close navigation menu" : "Open navigation menu"}
+        onClick={() => setShowMobileMenu((v) => !v)}
+      >
+        <Menu
+          size={30}
+          style={{
+            color: "url(#nav-gradient)", // fallback in case of svg, but tailwind doesn't do gradients directly
+            strokeWidth: 3,
+            background: "none"
+          }}
+          className="text-transparent bg-clip-text"
+        />
+        {/* SVG gradient for menu icon */}
+        <svg width="0" height="0">
+          <defs>
+            <linearGradient id="nav-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop stopColor="#ff3796" offset="0%" />
+              <stop stopColor="#ff90e8" offset="50%" />
+              <stop stopColor="#1e3a8a" offset="100%" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </button>
+
+      {/* Nav menu (panel) */}
+      {/* Mobile: show as panel only when menu is open, otherwise hidden! */}
+      {/* Desktop: always show */}
       <ul
         className={cn(
-          "absolute flex gap-2 transition-all duration-300",
+          // Panel styles
+          "flex gap-2 transition-all duration-300",
+          // Desktop
+          "absolute",
           collapsed
             ? "right-8 bottom-2 bg-black/60 rounded-xl px-4 py-1 shadow border border-zinc-700"
-            : "right-2 sm:right-6 bottom-[37px] bg-black/40 rounded-xl px-2 py-1 border border-zinc-700"
+            // On desktop expanded: move panel all the way right and up (far from adwaith text)
+            : "right-2 sm:right-6 bottom-[37px] bg-black/40 rounded-xl px-2 py-1 border border-zinc-700",
+          // Mobile show/hide
+          !collapsed
+            ? "sm:flex"
+            : "sm:flex",
+          // Mobile menu logic
+          (!collapsed && !showMobileMenu) ? "sm:flex hidden" : "" // hide when not collapsed unless menu is open
         )}
         style={{
           position: "absolute",
@@ -117,6 +179,11 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
                 maxHeight: 48,
                 overflow: "hidden"
               }),
+          // On mobile, show the nav menu only if showMobileMenu is true or if collapsed
+          display:
+            !collapsed && !showMobileMenu
+              ? "none"
+              : undefined
         }}
       >
         {sections.map(({ id, label, icon: Icon }) => (
@@ -153,9 +220,18 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
           font-weight: 900;
           letter-spacing: 0.03em;
         }
+        /* Gradient text for Menu icon, only applied if .text-transparent + .bg-clip-text applied */
+        .nav-link.active .gradient-text {
+          background: linear-gradient(92deg, #ff3796 20%, #ff90e8 55%, #1e3a8a 90%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          color: transparent;
+        }
       `}</style>
     </nav>
   );
 };
 
 export default NavBar;
+
