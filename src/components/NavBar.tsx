@@ -1,4 +1,3 @@
-
 import { Home, FileText, Mail, Menu } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -139,32 +138,36 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
         )}
         style={{
           background: "linear-gradient(120deg,#171717cc 80%,#ff379640 100%)",
-          border: `2px solid ${PINK}`,
+          border: `2px solid #ff3796`,
           boxShadow: "0 2px 14px #0006",
         }}
         aria-label={showMobileMenu ? "Close navigation menu" : "Open navigation menu"}
         onClick={() => setShowMobileMenu((v) => !v)}
+        id="navbar-mobile-hamburger"
       >
-        <Menu
-          size={30}
-          strokeWidth={3}
-          color={PINK}
-          style={{
-            background: "none"
-          }}
-          className="text-transparent bg-clip-text"
-        />
+        <svg width="30" height="30" fill="none" viewBox="0 0 30 30">
+          <rect y="6" width="30" height="3.2" rx="1.5" fill="#ff3796"/>
+          <rect y="13.4" width="30" height="3.2" rx="1.5" fill="#ff3796"/>
+          <rect y="20.8" width="30" height="3.2" rx="1.5" fill="#ff3796"/>
+        </svg>
       </button>
 
-      {/* Mobile: Dropdown nav panel */}
+      {/* Mobile: Dropdown nav panel - show BELOW the hamburger icon */}
       {showMobileMenu && !collapsed && (
         <ul
           className={cn(
             "sm:hidden flex flex-col items-stretch absolute z-[70]",
             "rounded-xl shadow-2xl border border-pink-600",
             "bg-black/95",
-            "bottom-16 right-3 min-w-[160px] overflow-hidden animate-fade-in"
+            "left-auto", // align right
+            "top-auto", // let us set top instead of bottom
+            "min-w-[160px] overflow-hidden animate-fade-in"
           )}
+          style={{
+            right: 12,
+            top: 62, /* Make this value a bit larger than the hamburger's bottom position so it's just underneath */
+            // The hamburger is at bottom-3 (0.75rem = 12px) in a 70px-high bar, so top: 62px ≈ just below it
+          }}
         >
           {sections.map(({ id, label, icon: Icon }) => (
             <li key={id}>
@@ -174,7 +177,7 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
                   active === id && "active"
                 )}
                 style={{
-                  color: active === id ? PINK : "#fff",
+                  color: active === id ? "#ff3796" : "#fff",
                   fontFamily: "'Caveat', cursive",
                   fontWeight: 700,
                   background: active === id ? "linear-gradient(92deg, #ff3796 15%, #ff90e8 55%, #1e3a8a 95%)" : "none",
@@ -185,7 +188,7 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
                 onClick={() => onNav(id)}
                 aria-label={label}
               >
-                <Icon size={22} color={PINK} className="inline -mt-1" />
+                <Icon size={22} color="#ff3796" className="inline -mt-1" />
                 <span>{label}</span>
               </button>
             </li>
@@ -267,4 +270,3 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
 };
 
 export default NavBar;
-
