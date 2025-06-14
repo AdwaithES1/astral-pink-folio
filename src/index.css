@@ -292,48 +292,54 @@ html {
   overflow: visible;
 }
 
+/* BIG, DRAMATIC, PINK-DEEPBLUE SHINE gliding L→R inside the TEXT ONLY */
 .bebas-gradient-heading::after {
   content: '';
   pointer-events: none;
   position: absolute;
   inset: 0;
   z-index: 2;
-  /* Animated wide pink-blue-pink gradient, highly visible */
+  /* Wide GRADIENT with bold pink, purple, blue, ice stops */
   background: linear-gradient(
-      95deg,
+      100deg,
       transparent 0%,
-      #ff3796 17%,
-      #ff90e8 30%,
-      #1e3a8a 65%,
-      transparent 90%
+      #ff3796 12%,
+      #c471ed 19%,
+      #7f5cff 38%,
+      #1e3a8a 56%,
+      #80eaff 73%,
+      #ff3796 84%,
+      transparent 100%
   );
-  background-size: 380px 100%;
+  background-size: 340% 100%;
   background-repeat: no-repeat;
-  /* Animate the gradient L→R */
-  animation: bebas-heading-shine-move 5s linear infinite;
+  /* Animate from left (invisible) to right (invisible), the vibrant zone cuts across the text */
+  animation: bebas-lr-gradient-shine 3.7s cubic-bezier(0.56, 0.07, 0.19, 0.96) infinite;
   mix-blend-mode: lighten;
+  opacity: 0.82; /* Strong enough to show, but not wash out text */
   /* CLIP the shine to text only */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  opacity: 0.88;
 }
 
-@keyframes bebas-heading-shine-move {
+@keyframes bebas-lr-gradient-shine {
   0% {
-    background-position: -400px 0;
-    opacity: 0.7;
+    background-position: -130% 0%;
+    opacity: 0.8;
   }
-  8% { opacity: 1; }
-  60% {
-    background-position: 400px 0;
+  12% { opacity: 1; }
+  54% {
+    background-position: 100% 0%;
     opacity: 1;
   }
-  88% { opacity: 0.7; }
+  88% {
+    opacity: 0.64;
+  }
   100% {
-    background-position: 400px 0;
-    opacity: 0.7;
+    background-position: 130% 0%;
+    opacity: 0.8;
   }
 }
 
