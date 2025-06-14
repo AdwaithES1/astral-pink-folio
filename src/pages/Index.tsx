@@ -112,6 +112,28 @@ const Index = () => {
                   My Github
                 </a>
               </div>
+              {/* Github link and "more at" (only visible on mobile) */}
+              <div className="flex flex-row items-center gap-2 mt-6 justify-center sm:hidden">
+                <span
+                  className="font-caveat text-xl text-white opacity-80 mr-2 select-none"
+                  style={{
+                    fontFamily: "'Caveat', cursive",
+                    letterSpacing: "0.01em"
+                  }}
+                >
+                  more at
+                </span>
+                <a
+                  href="https://github.com/yourgithub"
+                  target="_blank"
+                  rel="noopener"
+                  className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-3 py-2 rounded-xl shadow-md transition-all"
+                  style={{ boxShadow: "0 2px 8px #0007" }}
+                >
+                  <Github size={18} className="mr-2 group-hover:scale-110 transition" />
+                  My Github
+                </a>
+              </div>
             </div>
           </PopInOnView>
         </Section>
