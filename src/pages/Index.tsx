@@ -1,3 +1,4 @@
+
 import NavBar from "@/components/NavBar";
 import Main3DLaptop from "@/components/3DLaptop";
 import Section from "@/components/Section";
@@ -90,20 +91,40 @@ const Index = () => {
                   </div>
                 ))}
               </div>
-              {/* Github link bottom right */}
-              <a
-                href="https://github.com/yourgithub"
-                target="_blank"
-                rel="noopener"
-                className="absolute right-0 -bottom-8 flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-4 py-2 rounded-xl shadow-md transition-all"
-                style={{ boxShadow: "0 3px 12px #0007" }}
-              >
-                <Github size={20} className="mr-2 group-hover:scale-110 transition" />
-                My Github
-              </a>
+              {/* Github link bottom right, with "more at" label */}
+              <div className="absolute right-0 flex flex-row items-center gap-2" style={{ bottom: -60 }}>
+                <span
+                  className="font-caveat text-2xl sm:text-2xl text-white opacity-80 mr-2 select-none"
+                  style={{
+                    fontFamily: "'Caveat', cursive",
+                    letterSpacing: "0.01em"
+                  }}
+                >
+                  more at
+                </span>
+                <a
+                  href="https://github.com/yourgithub"
+                  target="_blank"
+                  rel="noopener"
+                  className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-4 py-2 rounded-xl shadow-md transition-all"
+                  style={{ boxShadow: "0 3px 12px #0007" }}
+                >
+                  <Github size={20} className="mr-2 group-hover:scale-110 transition" />
+                  My Github
+                </a>
+              </div>
             </div>
             {/* On mobile, show Github link as a block below */}
             <div className="flex sm:hidden justify-end mt-5 w-full">
+              <span
+                className="font-caveat text-lg text-white opacity-85 mr-1 select-none"
+                style={{
+                  fontFamily: "'Caveat', cursive",
+                  letterSpacing: "0.01em"
+                }}
+              >
+                more at
+              </span>
               <a
                 href="https://github.com/yourgithub"
                 target="_blank"
@@ -130,32 +151,44 @@ const Index = () => {
         </Section>
         <Section id="contact" title="Contact">
           <PopInOnView thresholdClass="animate-soft-pop-in">
-            <div className="flex flex-row gap-6 justify-center items-center mt-4">
-              <a href="mailto:adwaith@example.com" aria-label="Gmail" target="_blank" rel="noopener">
-                <Mail size={36} className="text-electric-pink hover:scale-110 transition" />
-              </a>
-              <a href="https://instagram.com/exampleprofile" aria-label="Instagram" target="_blank" rel="noopener">
-                <Instagram size={36} className="text-lite-pink hover:scale-110 transition" />
-              </a>
-              <a href="https://linkedin.com/in/adwaith" aria-label="LinkedIn" target="_blank" rel="noopener">
-                <Linkedin size={36} className="text-navy-blue hover:scale-110 transition" />
-              </a>
-            </div>
-            {/* Mobile number below contact icons */}
-            <div className="flex justify-center mt-2">
-              <span
-                className="font-sans text-[1rem] sm:text-base font-semibold"
-                style={{
-                  background: "linear-gradient(90deg,#fff 60%,#ff90e8 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  fontWeight: 700,
-                  letterSpacing: "0.01em"
-                }}
-              >
-                999999999
-              </span>
+            <div className="flex flex-col items-center mt-4">
+              {/* Contact icons */}
+              <div className="flex flex-row gap-6 justify-center items-center">
+                <a href="mailto:adwaith@example.com" aria-label="Gmail" target="_blank" rel="noopener">
+                  <Mail size={36} className="text-electric-pink hover:scale-110 transition" />
+                </a>
+                <a href="https://instagram.com/exampleprofile" aria-label="Instagram" target="_blank" rel="noopener">
+                  <Instagram size={36} className="text-lite-pink hover:scale-110 transition" />
+                </a>
+                <a href="https://linkedin.com/in/adwaith" aria-label="LinkedIn" target="_blank" rel="noopener">
+                  <Linkedin size={36} className="text-navy-blue hover:scale-110 transition" />
+                </a>
+              </div>
+              {/* Gap between icons and mobile contact */}
+              <div className="mt-5 flex flex-col items-center">
+                <span
+                  className="font-caveat text-xl text-white/80 mb-1 select-none"
+                  style={{
+                    fontFamily: "'Caveat', cursive",
+                    letterSpacing: "0.01em"
+                  }}
+                >
+                  or ring me at
+                </span>
+                <span
+                  className="font-sans text-base sm:text-lg font-semibold"
+                  style={{
+                    background: "linear-gradient(90deg,#fff 60%,#ff90e8 100%)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    color: "transparent",
+                    fontWeight: 700,
+                    letterSpacing: "0.01em"
+                  }}
+                >
+                  999999999
+                </span>
+              </div>
             </div>
           </PopInOnView>
         </Section>
@@ -168,3 +201,4 @@ const Index = () => {
 };
 
 export default Index;
+
