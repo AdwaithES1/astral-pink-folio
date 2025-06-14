@@ -24,7 +24,7 @@ const Index = () => {
       >
         <Main3DLaptop />
         <h1
-          className={`shine-heading text-5xl font-extrabold mb-2 mt-8 animate-fast-pop-in ${
+          className={`heading-gradient-shine text-5xl font-extrabold mb-2 mt-8 animate-fast-pop-in ${
             animateHero ? "show-fast-pop-in" : ""
           }`}
           style={{ zIndex: 3 }}
@@ -76,4 +76,3 @@ const Index = () => {
 };
 
 export default Index;
-

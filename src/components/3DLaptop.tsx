@@ -1,144 +1,265 @@
-import { Canvas } from "@react-three/fiber";
-import { Suspense } from "react";
-import LaptopWallpaper from "./LaptopWallpaper";
 
-// Major replacement: serious sci-fi style
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Suspense, useRef } from "react";
+import * as THREE from "three";
 
-// Sci-fi laptop: slim, metallic, sharp bevels, glowing ports, etc.
-function SciFiLaptop() {
+// --- 2200 sci-fi layered laptop --- //
+function FuturisticLaptop() {
+  // Animate device "power waves" and hologram
+  const powerHoloRef = useRef<THREE.Mesh>(null!);
+  const neonLinesRef = useRef<THREE.Mesh>(null!);
+
+  useFrame(({ clock }) => {
+    // Animate hologram panel
+    if (powerHoloRef.current) {
+      const t = clock.getElapsedTime();
+      powerHoloRef.current.position.y = 0.85 + Math.sin(t * 2.4) * 0.09;
+      powerHoloRef.current.material.opacity = 0.25 + 0.12 * Math.sin(t * 2.2 + 0.7);
+    }
+    // Subtle shimmer for neon lines
+    if (neonLinesRef.current) {
+      const t = clock.getElapsedTime();
+      neonLinesRef.current.material.opacity = 0.32 + 0.13 * Math.sin(t * 3.1);
+    }
+  });
+
   return (
     <group>
-      {/* Metallic base with angular bevels */}
-      <mesh position={[0, -0.3, 0]}>
-        <boxGeometry args={[2.05, 0.085, 1.23]} />
-        <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#18121e", roughness: 0.11, metalness: 0.96, envMapIntensity: 1.3 }]}
-        />
-      </mesh>
-      {/* Thin glowing base rim */}
-      <mesh position={[0, -0.256, 0]}>
-        <boxGeometry args={[2.07, 0.02, 1.24]} />
-        <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#ff3796", metalness: 0.89, roughness: 0.1, emissive: "#ff3796", emissiveIntensity: 0.19, transparent: true, opacity: 0.16 }]}
-        />
-      </mesh>
-      {/* Hinge (glowing center) */}
-      <mesh position={[0, -0.19, -0.59]}>
-        <cylinderGeometry args={[0.055, 0.055, 2, 38]} />
-        <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#281a3a", metalness: 0.8, roughness: 0.18, emissive: "#ff3796", emissiveIntensity: 0.13 }]}
-        />
-      </mesh>
-      {/* Screen casing (dark metallic, big border) */}
-      <mesh position={[0, 0.7, -0.44]} rotation={[-0.23, 0, 0]}>
-        <boxGeometry args={[1.95, 1.12, 0.11]} />
-        <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#12101A", roughness: 0.09, metalness: 0.8, envMapIntensity: 1.5 }]}
-        />
-      </mesh>
-      {/* Glowing bevel border for screen */}
-      <mesh position={[0, 0.695, -0.398]} rotation={[-0.23, 0, 0]}>
-        <boxGeometry args={[2.0, 1.16, 0.01]} />
-        <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#ff3796", metalness: 0.75, roughness: 0.06, transparent: true, opacity: 0.065, emissive: "#ff3796", emissiveIntensity: 0.15 }]}
-        />
-      </mesh>
-      {/* Screen */}
-      <group position={[0, 0.705, -0.494]} rotation={[-0.23, 0, 0]}>
-        <LaptopWallpaper />
-      </group>
-      {/* Glow behind screen */}
-      <mesh position={[0, 0.80, -0.56]}>
-        <planeGeometry args={[2.2, 1.18]} />
+      {/* FLOATING PARALLAX SHADOW */}
+      <mesh position={[0, -0.52, -0.28]} rotation={[-0.41, 0, 0]}>
+        <ellipseGeometry args={[2.6, 0.7, 54]} />
         <meshBasicMaterial
           attach="material"
-          args={[{ color: "#ff3796", transparent: true, opacity: 0.13 }]}
+          args={[{ color: "#0e0a2f", opacity: 0.39, transparent: true }]}
         />
       </mesh>
-      {/* Gradient reflection on base */}
-      <mesh position={[0, -0.20, 0]}>
-        <planeGeometry args={[1.8, 1.1]} />
+
+      {/* BASE - Metallic chassis, chunky */}
+      <mesh position={[0, -0.35, 0]} castShadow receiveShadow>
+        <boxGeometry args={[2.72, 0.13, 1.4]} />
+        <meshStandardMaterial
+          attach="material"
+          args={[{ color: "#13122b", metalness: 0.98, roughness: 0.13, envMapIntensity: 1.9 }]}
+        />
+      </mesh>
+      {/* Glowing edge wrap */}
+      <mesh position={[0, -0.293, 0]} castShadow>
+        <boxGeometry args={[2.77, 0.02, 1.41]} />
+        <meshStandardMaterial
+          attach="material"
+          args={[{ color: "#1e3a8a", emissive: "#1e3a8a", metalness: 0.7, roughness: 0.07, emissiveIntensity: 0.4, opacity: 0.22, transparent: true }]}
+        />
+      </mesh>
+
+      {/* KEYBOARD - glowing underlay */}
+      <mesh position={[0, -0.243, 0.18]} receiveShadow>
+        <boxGeometry args={[1.75, 0.013, 0.46]} />
+        <meshStandardMaterial
+          attach="material"
+          args={[{ color: "#182050", emissive: "#ff3796", emissiveIntensity: 0.17, metalness: 1, roughness: 0.32 }]}
+        />
+      </mesh>
+      {/* Keys (rows, glowing pulse) */}
+      {[...Array(4)].map((_, row) =>
+        [...Array(14)].map((__, col) => (
+          <mesh
+            key={row + "-" + col}
+            position={[
+              -0.835 + col * 0.13,
+              -0.223,
+              0.008 + row * 0.09 + 0.04,
+            ]}
+          >
+            <boxGeometry args={[0.085, 0.018, 0.07]} />
+            <meshStandardMaterial
+              attach="material"
+              color="#19143f"
+              metalness={0.7}
+              roughness={0.24}
+              emissive={col % 2 === 0 ? "#ff3796" : "#fff"}
+              emissiveIntensity={row === 2 ? 0.079 : 0.059}
+              transparent
+              opacity={0.81}
+            />
+          </mesh>
+        ))
+      )}
+
+      {/* WIREFRAME OVERLAY */}
+      <mesh position={[0, -0.213, 0.21]}>
+        <boxGeometry args={[1.77, 0.015, 0.49]} />
         <meshBasicMaterial
           attach="material"
-          args={[{ color: "#ff90e8", transparent: true, opacity: 0.11 }]}
+          color="#ff90e8"
+          wireframe
+          opacity={0.22}
+          transparent
         />
       </mesh>
-      {/* Side glowing port dots */}
-      {[-0.98, 0.98].map((x, i) => (
-        <mesh position={[x, -0.31, 0.49]} key={i}>
-          <cylinderGeometry args={[0.018, 0.018, 0.011, 20]} />
+
+      {/* HINGE - deep glowing */}
+      <mesh position={[0, -0.19, -0.71]}>
+        <cylinderGeometry args={[0.09, 0.08, 2.1, 40]} />
+        <meshStandardMaterial
+          attach="material"
+          args={[{ color: "#161450", metalness: 0.9, roughness: 0.18, emissive: "#ff3796", emissiveIntensity: 0.15 }]}
+        />
+      </mesh>
+
+      {/* --- SCREEN with animated wallpaper --- */}
+      <mesh position={[0, 0.76, -0.53]} rotation={[-0.25, 0, 0]}>
+        <boxGeometry args={[2.04, 1.22, 0.11]} />
+        <meshStandardMaterial
+          attach="material"
+          args={[{ color: "#101059", roughness: 0.10, metalness: 0.88, envMapIntensity: 1.5 }]}
+        />
+      </mesh>
+      {/* SCREEN GLOW edge */}
+      <mesh position={[0, 0.76, -0.474]} rotation={[-0.25, 0, 0]}>
+        <boxGeometry args={[2.10, 1.255, 0.01]} />
+        <meshStandardMaterial
+          attach="material"
+          args={[{ color: "#ff3796", metalness: 0.81, roughness: 0.06, transparent: true, opacity: 0.082, emissive: "#ff3796", emissiveIntensity: 0.26 }]}
+        />
+      </mesh>
+      {/* Parallax reflection layer */}
+      <mesh position={[0.13, 0.79, -0.495]} rotation={[-0.25, 0.05, 0]}>
+        <planeGeometry args={[2.01, 1.18]} />
+        <meshStandardMaterial
+          attach="material"
+          args={[{ color: "#fff", transparent: true, opacity: 0.09, metalness: 1, roughness: 0 }]}
+        />
+      </mesh>
+
+      {/* --- ANIMATED WALLPAPER --- */}
+      {/* Deep blue animated waves */}
+      <mesh position={[0, 0.778, -0.49]} rotation={[-0.25, 0, 0]}>
+        <planeGeometry args={[1.91, 1.14]} />
+        <meshStandardMaterial
+          attach="material"
+          args={[{ color: "#1e3a8a", roughness: 0.09, metalness: 0.5, emissive: "#19186e", emissiveIntensity: 0.13 }]}
+        />
+      </mesh>
+
+      {/* Central pink energy ball */}
+      <mesh position={[0, 0.98, -0.47]}>
+        <sphereGeometry args={[0.21, 42, 42]} />
+        <meshStandardMaterial
+          attach="material"
+          color="#ff3796"
+          emissive="#ff3796"
+          metalness={0.85}
+          roughness={0.18}
+          emissiveIntensity={0.76}
+        />
+      </mesh>
+      {/* Glow behind ball */}
+      <mesh position={[0, 0.98, -0.46]}>
+        <sphereGeometry args={[0.34, 30, 30]} />
+        <meshBasicMaterial
+          attach="material"
+          color="#ff3796"
+          transparent
+          opacity={0.13}
+        />
+      </mesh>
+      {/* Lines around ball (spinning energy array) */}
+      {[0, 0.9, 1.8].map((rot, idx) => (
+        <mesh key={idx} position={[0, 0.98, -0.44]} rotation={[0, 0, rot]}>
+          <torusGeometry args={[0.28 + 0.015 * idx, 0.012 + 0.006 * idx, 18, 52]} />
           <meshStandardMaterial
             attach="material"
-            args={[{ color: "#ff3796", metalness: 1, roughness: 0.05, emissive: "#ff3796", emissiveIntensity: 0.7 }]}
+            color="#1e3a8a"
+            metalness={1}
+            roughness={0.28}
+            emissive="#1e3a8a"
+            emissiveIntensity={0.12 + 0.12 * idx}
+            opacity={0.21 + 0.10 * idx}
+            transparent
           />
         </mesh>
       ))}
+
+      {/* --- FLOATING NEON LINES and PANELS --- */}
+      {/* Neon lines (move opacity for shimmer) */}
+      <mesh ref={neonLinesRef} position={[0, 0.56, -0.38]}>
+        <planeGeometry args={[0.95, 0.045]} />
+        <meshBasicMaterial
+          attach="material"
+          color="#ff3796"
+          opacity={0.32}
+          transparent
+        />
+      </mesh>
+      {/* Hologram popup (animated upward shimmer) */}
+      <mesh
+        ref={powerHoloRef}
+        position={[0.31, 0.77, -0.54]}
+        rotation={[-0.41, 0, -0.18]}
+      >
+        <planeGeometry args={[0.33, 0.45]} />
+        <meshStandardMaterial
+          attach="material"
+          color="#fff"
+          roughness={0.28}
+          metalness={0.0}
+          transparent
+          opacity={0.21}
+          emissive="#ff3796"
+          emissiveIntensity={0.16}
+        />
+      </mesh>
+      {/* Flickering mini-holos */}
+      {[[-0.9, 0.91, -0.46], [0.9, 0.92, -0.44]].map(([x, y, z], idx) => (
+        <mesh
+          key={idx}
+          position={[x, y, z]}
+          rotation={[-0.27, 0, 0.6 - 1.2 * idx]}
+        >
+          <boxGeometry args={[0.15, 0.04, 0.09]} />
+          <meshStandardMaterial
+            attach="material"
+            color="#1e3a8a"
+            roughness={0.39}
+            metalness={0.92}
+            transparent
+            opacity={0.22}
+            emissive="#fff"
+            emissiveIntensity={0.28}
+          />
+        </mesh>
+      ))}
+
+      {/* --- LIGHT SOURCES for more drama --- */}
+      <pointLight position={[0, 2.1, 2.2]} intensity={0.47} color="#ff3796" />
+      <spotLight
+        position={[0, 2.7, 1.1]}
+        angle={0.51}
+        penumbra={0.39}
+        intensity={0.34}
+        color="#fff"
+        castShadow
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+      />
+      <pointLight position={[1.5, 0.1, 1.3]} intensity={0.23} color="#ff90e8" />
+      <pointLight position={[-1.6, 0.35, -0.81]} intensity={0.21} color="#1e3a8a" />
     </group>
   );
 }
 
-// Floating orbs: sci-fi gradients, hover around
-const FloatingIcon = ({
-  icon,
-  color,
-  position = [0, 0, 0],
-  speed = 0.4,
-  scale = 0.22,
-}: {
-  icon: "file" | "mail" | "about" | "home";
-  color: string;
-  position?: [number, number, number];
-  speed?: number;
-  scale?: number;
-}) => (
-  <mesh position={position}>
-    <sphereGeometry args={[scale || 0.22, 38, 38]} />
-    <meshStandardMaterial
-      attach="material"
-      args={[{ color, metalness: 0.9, roughness: 0.21, emissive: color, emissiveIntensity: 0.66 }]}
-    />
-  </mesh>
-);
-
-// Floating icons: improved sci-fi placement
-const iconsData: {
-  icon: "home" | "about" | "file" | "mail";
-  color: string;
-  position: [number, number, number];
-  scale: number;
-}[] = [
-  { icon: "home", color: "#ff3796", position: [1.19, 0.89, 0.13], scale: 0.13 },
-  { icon: "about", color: "#1e3a8a", position: [-1.16, 0.85, 0.20], scale: 0.13 },
-  { icon: "file", color: "#ff90e8", position: [0.95, 1.15, -0.25], scale: 0.11 },
-  { icon: "mail", color: "#ff90e8", position: [0.44, 0.41, 0.7], scale: 0.13 },
-  { icon: "home", color: "#ff3796", position: [-0.95, 1.27, -0.36], scale: 0.12 },
-];
-
 const Main3DLaptop = () => (
   <div className="w-full h-[420px] md:h-[540px] select-none pt-7 md:pt-10 flex items-center justify-center">
     <Canvas
-      camera={{ position: [0, 1.24, 4.14], fov: 32, near: 0.1, far: 30 }}
+      camera={{ position: [0, 1.16, 4.06], fov: 32, near: 0.1, far: 35 }}
       gl={{ antialias: true, alpha: true }}
       style={{ background: "transparent", width: "100%", height: "100%" }}
+      shadows
     >
-      <ambientLight intensity={0.89} />
-      <pointLight position={[-5, 8, 6]} color="#ff3796" intensity={0.18} />
-      <pointLight position={[5, 7, 8]} color="#1e3a8a" intensity={0.16} />
-      <directionalLight position={[0, 5, 4]} intensity={0.17} />
+      <ambientLight intensity={0.75} color="#18121e" />
       <Suspense fallback={null}>
         <group rotation={[0.185, 0.29, 0.01]}>
-          <SciFiLaptop />
-          {/* Floating icons */}
-          {iconsData.map((icon, i) => (
-            <group key={i} position={icon.position}>
-              <FloatingIcon {...icon} />
-            </group>
-          ))}
+          <FuturisticLaptop />
         </group>
       </Suspense>
     </Canvas>

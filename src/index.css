@@ -136,3 +136,44 @@ html {
   animation-iteration-count: infinite;
   animation-duration: 3s;
 }
+
+/* --- SHINE GRADIENT FOR HEADINGS --- */
+@keyframes shine-gradient {
+  0% {
+    background-position: -370px 0;
+  }
+  60% {
+    background-position: 370px 0;
+  }
+  100% {
+    background-position: 370px 0;
+  }
+}
+.heading-gradient-shine {
+  position: relative;
+  font-weight: 900;
+  background: linear-gradient(
+      90deg,
+      #fff 8%,
+      #ff3796 51%,
+      #fff 83%,
+      #1e3a8a 100%
+    ),
+    linear-gradient(
+      120deg,
+      #fff 0%,
+      #ff3796 35%,
+      #1e3a8a 70%,
+      #fff 100%
+    );
+  background-size: 370px 100%;
+  background-repeat: no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shine-gradient 3s linear infinite;
+  /* Hard light for depth on top gradients */
+  mix-blend-mode: lighten;
+  letter-spacing: 0.04em;
+}
