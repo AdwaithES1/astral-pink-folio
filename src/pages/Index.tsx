@@ -1,4 +1,3 @@
-
 import NavBar from "@/components/NavBar";
 import Main3DLaptop from "@/components/3DLaptop";
 import Section from "@/components/Section";
@@ -46,7 +45,7 @@ const Index = () => {
             transition-all duration-[430ms] ease-[cubic-bezier(0.29,1.46,0.6,0.97)] ${burstAnim ? "origin-center scale-150 translate-y-12 opacity-0" : ""}
           `}
         >
-          Futuristic full-stack web developer with a flair for 3D visuals and modern, professional UIs.
+          An AI/ML geek who enjoys teaching machines to do my chores—one real-world solution at a time!
         </h2>
       </div>
 
@@ -99,4 +98,3 @@ const Index = () => {
 };
 
 export default Index;
-
