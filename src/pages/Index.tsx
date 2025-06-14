@@ -141,6 +141,22 @@ const Index = () => {
                 <Linkedin size={36} className="text-navy-blue hover:scale-110 transition" />
               </a>
             </div>
+            {/* Mobile number below contact icons */}
+            <div className="flex justify-center mt-2">
+              <span
+                className="font-sans text-[1rem] sm:text-base font-semibold"
+                style={{
+                  background: "linear-gradient(90deg,#fff 60%,#ff90e8 100%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  fontWeight: 700,
+                  letterSpacing: "0.01em"
+                }}
+              >
+                999999999
+              </span>
+            </div>
           </PopInOnView>
         </Section>
       </main>
