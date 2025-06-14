@@ -40,6 +40,21 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
     return () => window.removeEventListener("resize", handleResize);
   }, [showMobileMenu]);
 
+  // Close dropdown on outside click for mobile menu
+  useEffect(() => {
+    if (!showMobileMenu) return;
+    function handleClick(e: MouseEvent) {
+      if (
+        navBarRef.current &&
+        !navBarRef.current.contains(e.target as Node)
+      ) {
+        setShowMobileMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [showMobileMenu]);
+
   const onNav = (id: string) => {
     setActive(id);
     const el = document.getElementById(id);
@@ -51,6 +66,8 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
 
   const NAV_EXPANDED_HEIGHT = 170;
   const NAV_COLLAPSED_HEIGHT = 70;
+
+  const PINK = "#ff3796";
 
   return (
     <nav
@@ -70,7 +87,6 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
       {/* Branding */}
       {!collapsed && (
         <div className="flex flex-col items-start justify-center h-full pl-4 sm:pl-8 pt-2 pb-1 relative">
-          {/* Removed contact icons & info from top right */}
           <div
             className={cn(
               "transition-transform duration-[520ms] scale-100 opacity-100 select-none"
@@ -113,61 +129,79 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
         </div>
       )}
 
-      {/* Hamburger menu for mobile screens: show ONLY when not collapsed and for small screens */}
+      {/* Hamburger menu for mobile screens: show ONLY when not collapsed and on small screens */}
       <button
         className={cn(
           "sm:hidden absolute z-[60] transition-all duration-200 rounded-xl p-2 flex items-center justify-center",
           !collapsed
-            ? "bottom-3 right-3 bg-black/70 shadow-lg border border-zinc-700"
+            ? "bottom-3 right-3"
             : "hidden"
         )}
         style={{
-          // Soft gradient border for the icon on mobile
           background: "linear-gradient(120deg,#171717cc 80%,#ff379640 100%)",
+          border: `2px solid ${PINK}`,
+          boxShadow: "0 2px 14px #0006",
         }}
         aria-label={showMobileMenu ? "Close navigation menu" : "Open navigation menu"}
         onClick={() => setShowMobileMenu((v) => !v)}
       >
         <Menu
           size={30}
+          strokeWidth={3}
+          color={PINK}
           style={{
-            color: "url(#nav-gradient)", // fallback in case of svg, but tailwind doesn't do gradients directly
-            strokeWidth: 3,
             background: "none"
           }}
           className="text-transparent bg-clip-text"
         />
-        {/* SVG gradient for menu icon */}
-        <svg width="0" height="0">
-          <defs>
-            <linearGradient id="nav-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop stopColor="#ff3796" offset="0%" />
-              <stop stopColor="#ff90e8" offset="50%" />
-              <stop stopColor="#1e3a8a" offset="100%" />
-            </linearGradient>
-          </defs>
-        </svg>
       </button>
 
+      {/* Mobile: Dropdown nav panel */}
+      {showMobileMenu && !collapsed && (
+        <ul
+          className={cn(
+            "sm:hidden flex flex-col items-stretch absolute z-[70]",
+            "rounded-xl shadow-2xl border border-pink-600",
+            "bg-black/95",
+            "bottom-16 right-3 min-w-[160px] overflow-hidden animate-fade-in"
+          )}
+        >
+          {sections.map(({ id, label, icon: Icon }) => (
+            <li key={id}>
+              <button
+                className={cn(
+                  "nav-link w-full text-left flex items-center gap-2 px-4 py-3 border-b border-zinc-800 last:border-b-0 font-caveat font-bold tracking-tight text-base",
+                  active === id && "active"
+                )}
+                style={{
+                  color: active === id ? PINK : "#fff",
+                  fontFamily: "'Caveat', cursive",
+                  fontWeight: 700,
+                  background: active === id ? "linear-gradient(92deg, #ff3796 15%, #ff90e8 55%, #1e3a8a 95%)" : "none",
+                  WebkitBackgroundClip: active === id ? "text" : undefined,
+                  WebkitTextFillColor: active === id ? "transparent" : undefined,
+                  transition: "background 0.3s"
+                }}
+                onClick={() => onNav(id)}
+                aria-label={label}
+              >
+                <Icon size={22} color={PINK} className="inline -mt-1" />
+                <span>{label}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
       {/* Nav menu (panel) */}
-      {/* Mobile: show as panel only when menu is open, otherwise hidden! */}
-      {/* Desktop: always show */}
+      {/* Mobile: hide expanded nav menu, show only on desktop/collapsed */}
       <ul
         className={cn(
-          // Panel styles
-          "flex gap-2 transition-all duration-300",
-          // Desktop
-          "absolute",
+          "absolute flex gap-2 transition-all duration-300",
           collapsed
             ? "right-8 bottom-2 bg-black/60 rounded-xl px-4 py-1 shadow border border-zinc-700"
-            // On desktop expanded: move panel all the way right and up (far from adwaith text)
-            : "right-2 sm:right-6 bottom-[37px] bg-black/40 rounded-xl px-2 py-1 border border-zinc-700",
-          // Mobile show/hide
-          !collapsed
-            ? "sm:flex"
-            : "sm:flex",
-          // Mobile menu logic
-          (!collapsed && !showMobileMenu) ? "sm:flex hidden" : "" // hide when not collapsed unless menu is open
+            : "right-2 sm:right-8 bottom-[37px] bg-black/40 rounded-xl px-2 py-1 border border-zinc-700",
+          !collapsed ? "sm:flex hidden" : "sm:flex", // only show expanded on desktop/collapsed states
         )}
         style={{
           position: "absolute",
@@ -179,11 +213,6 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
                 maxHeight: 48,
                 overflow: "hidden"
               }),
-          // On mobile, show the nav menu only if showMobileMenu is true or if collapsed
-          display:
-            !collapsed && !showMobileMenu
-              ? "none"
-              : undefined
         }}
       >
         {sections.map(({ id, label, icon: Icon }) => (
@@ -201,7 +230,7 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
                 padding: collapsed ? "6px 8px" : "4px 6px"
               }}
             >
-              <Icon size={collapsed ? 22 : 20} className="inline -mt-1 mr-1 text-portfolio-gradient-from" />
+              <Icon size={collapsed ? 22 : 20} className="inline -mt-1 mr-1 text-portfolio-gradient-from" color={PINK} />
               <span className={active === id ? "gradient-text" : ""}>
                 {label}
               </span>
@@ -220,13 +249,17 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
           font-weight: 900;
           letter-spacing: 0.03em;
         }
-        /* Gradient text for Menu icon, only applied if .text-transparent + .bg-clip-text applied */
         .nav-link.active .gradient-text {
           background: linear-gradient(92deg, #ff3796 20%, #ff90e8 55%, #1e3a8a 90%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
           color: transparent;
+        }
+        @media (max-width: 640px) {
+          .nav-link {
+            font-size: 1.11rem;
+          }
         }
       `}</style>
     </nav>
