@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from "react";
 
 type WelcomeOverlayProps = {
@@ -6,17 +5,15 @@ type WelcomeOverlayProps = {
 };
 
 const INTRO_DURATION = 2100; // ms before collapse
-const COLLAPSE_DURATION = 800; // ms collapse/shatter
+const COLLAPSE_DURATION = 850; // slightly longer
 
-// Bursting "grid" background and neon "particle field" + fast hologram
+// Bursting "grid" background and neon "particle field" + fast hologram, NO text
 export default function WelcomeOverlay({ onFinish }: WelcomeOverlayProps) {
   const [collapsing, setCollapsing] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Start collapse after intro
     timerRef.current = setTimeout(() => setCollapsing(true), INTRO_DURATION);
-
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
@@ -42,34 +39,8 @@ export default function WelcomeOverlay({ onFinish }: WelcomeOverlayProps) {
       }}
       aria-label="Futuristic welcome intro"
     >
-      {/* Fast grid and particles */}
+      {/* Only animated SVG FX: grid + neon particles + flicker effect, NO TEXT */}
       <BurstingFX spinning={!collapsing} />
-
-      {/* Neon brand burst */}
-      <span
-        className={`absolute left-1/2 top-1/2 text-white font-extrabold text-6xl md:text-8xl mix-blend-difference tracking-[0.16em]
-          transition-all duration-800
-          ${collapsing ? "scale-[5.6] opacity-0 blur-[8px] duration-[420ms]" : "scale-100 opacity-100 blur-0"}
-        `}
-        style={{
-          fontFamily: "Bebas Neue,sans-serif,monospace",
-          letterSpacing: "0.19em",
-          textShadow: "0 0 60px #22f4ff99, 0 0 80px #FFF, 0 0 10px #fff",
-        }}
-      >
-        ADWAITH
-      </span>
-      {/* Subtitle effect */}
-      <span className={`absolute left-1/2 top-[66%] translate-x-[-50%] font-sans text-lg md:text-2xl font-semibold text-cyan-100 tracking-wide
-          transition-all duration-800 ${collapsing ? "opacity-0 blur-sm scale-[1.5]" : "opacity-100"}
-        `}
-        style={{
-          fontFamily: "Inter,sans-serif",
-          filter: "drop-shadow(0 0 7px #00fff988)",
-        }}
-      >
-        Welcome to the Future
-      </span>
     </div>
   );
 }
