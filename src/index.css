@@ -280,15 +280,55 @@ html {
   position: relative;
   display: inline-block;
   font-family: 'Bebas Neue', sans-serif;
-  font-weight: 900; /* Use bold */
+  font-weight: 900;
   letter-spacing: 0.03em; /* Reduced for headings */
-  background: linear-gradient(92deg, #fff 18%, #ff3796 55%, #ff90e8 90%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
+  color: #fff; /* Always solid white */
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
   z-index: 1;
   overflow: visible;
+  /* No gradient by default -- replaced by animated overlay */
+}
+
+/* Animated gradient shine overlay */
+.bebas-gradient-heading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    #ff3796 18%,
+    #ff90e8 38%,
+    #1e3a8a 70%,
+    transparent 95%
+  );
+  background-size: 450px 100%;
+  background-repeat: no-repeat;
+  mix-blend-mode: lighten;
+  opacity: 0.77;
+  /* Animate left to right every 5s */
+  animation: heading-horizontal-shine 5s linear infinite;
+}
+
+@keyframes heading-horizontal-shine {
+  0% {
+    background-position: -400px 0;
+    opacity: 0.65;
+  }
+  15% { opacity: 0.88; }
+  50% {
+    background-position: 400px 0;
+    opacity: 1;
+  }
+  70% { opacity: 0.77; }
+  100% {
+    background-position: 400px 0;
+    opacity: 0.65;
+  }
 }
 
 /* INSIDE-THE-TEXT MOVING "WATER SPILL" EFFECT (using a blue/pink blend, semi-translucent, soft edges) */
