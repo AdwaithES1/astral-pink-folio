@@ -1,4 +1,3 @@
-
 import { Home, FileText, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -106,11 +105,18 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
           "absolute flex gap-2 transition-all duration-300",
           collapsed
             ? "right-8 bottom-2 bg-black/60 rounded-xl px-4 py-1 shadow border border-zinc-700"
-            : "right-8 bottom-4 bg-black/40 rounded-xl px-4 py-2 border border-zinc-700"
+            : "right-8 bottom-2 bg-black/40 rounded-xl px-2 py-1 border border-zinc-700"
         )}
         style={{
           position: "absolute",
           zIndex: 30,
+          ...(collapsed
+            ? {}
+            : {
+                minHeight: 46,
+                maxHeight: 48,
+                overflow: "hidden"
+              }),
         }}
       >
         {sections.map(({ id, label, icon: Icon }) => (
@@ -122,9 +128,13 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
               )}
               onClick={() => onNav(id)}
               aria-label={label}
-              style={{ fontFamily: "'Caveat', cursive", fontWeight: 700 }}
+              style={{
+                fontFamily: "'Caveat', cursive",
+                fontWeight: 700,
+                padding: collapsed ? "6px 8px" : "4px 6px"
+              }}
             >
-              <Icon size={collapsed ? 22 : 24} className="inline -mt-1 mr-1 text-portfolio-gradient-from" />
+              <Icon size={collapsed ? 22 : 20} className="inline -mt-1 mr-1 text-portfolio-gradient-from" />
               <span className={active === id ? "gradient-text" : ""}>
                 {label}
               </span>
@@ -149,4 +159,3 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
 };
 
 export default NavBar;
-
