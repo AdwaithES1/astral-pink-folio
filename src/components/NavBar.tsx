@@ -105,7 +105,8 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
           "absolute flex gap-2 transition-all duration-300",
           collapsed
             ? "right-8 bottom-2 bg-black/60 rounded-xl px-4 py-1 shadow border border-zinc-700"
-            : "right-8 bottom-2 bg-black/40 rounded-xl px-2 py-1 border border-zinc-700"
+            : "right-16 sm:right-24 bottom-[37px] bg-black/40 rounded-xl px-2 py-1 border border-zinc-700"
+            // increased right property when expanded
         )}
         style={{
           position: "absolute",
