@@ -1,4 +1,3 @@
-
 import NavBar from "@/components/NavBar";
 import Main3DLaptop from "@/components/3DLaptop";
 import Section from "@/components/Section";
@@ -81,10 +80,10 @@ const Index = () => {
                       />
                     </div>
                     <div className="flex flex-col justify-center">
-                      <h3 className="font-caveat font-bold text-xl text-white mb-1">
+                      <h3 className="font-bold text-xl text-white mb-1 font-sans">
                         {work.name}
                       </h3>
-                      <p className="text-zinc-300 text-sm max-w-[180px]">
+                      <p className="text-zinc-300 text-sm max-w-[180px] font-sans">
                         {work.desc.substring(0, 200)}
                       </p>
                     </div>
