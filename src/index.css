@@ -402,3 +402,106 @@ html {
 }
 
 /* Old .super-gradient-heading, .heading-gradient-shine etc remain unchanged, for other use */
+
+/* --- DRAMATIC HEADING STYLES --- */
+
+/* 1. Basic pure white Bebas Neue heading (no gradient, no animation, most readable) */
+.bebas-white-heading {
+  position: relative;
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  color: #fff;
+  background: none !important;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* 2. Static white-pink-deepblue gradient heading (simple readable effect, no animation) */
+.bebas-gradient-heading {
+  position: relative;
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  /* Static readable gradient */
+  background: linear-gradient(90deg, #fff 0%, #ff3796 60%, #1e3a8a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  /* Responsive fallback: always readable if bg-clip not supported */
+}
+
+/* 3. Animated pink-purple-blue-teal shine inside white text */
+.bebas-animated-gradient-heading {
+  position: relative;
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  background: linear-gradient(90deg, #fff 0%, #fff 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  z-index: 1;
+  overflow: visible;
+}
+.bebas-animated-gradient-heading::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  /* Dynamic vibrant gradient spilling through the text */
+  background: linear-gradient(
+      100deg,
+      transparent 0%,
+      #ff3796 10%,
+      #c471ed 22%,
+      #7f5cff 36%,
+      #1e3a8a 55%,
+      #80eaff 70%,
+      #ff3796 86%,
+      transparent 99%
+  );
+  background-size: 350% 100%;
+  background-repeat: no-repeat;
+  animation: bebas-lr-gradient-shine 3.5s cubic-bezier(0.56, 0.07, 0.19, 0.96) infinite;
+  mix-blend-mode: lighten;
+  opacity: 0.8;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+@keyframes bebas-lr-gradient-shine {
+  0% {
+    background-position: -130% 0%;
+    opacity: 0.82;
+  }
+  10% { opacity: 1; }
+  54% {
+    background-position: 100% 0%;
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.64;
+  }
+  100% {
+    background-position: 130% 0%;
+    opacity: 0.82;
+  }
+}
+
+/* ===== NARROWER, BOLDER NAV BRAND ==== */
+.navbar-brand-adwaith {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 900 !important;
+  letter-spacing: 0.08em !important;
+  /* Reduce spacing from 0.18em or 0.11em to 0.08em */
+}
+
+/* Old .super-gradient-heading, .heading-gradient-shine etc remain unchanged, for other use */
