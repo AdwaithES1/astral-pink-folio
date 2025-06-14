@@ -1,3 +1,4 @@
+
 import { Home, FileText, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -64,12 +65,14 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
               transition: "all 0.52s cubic-bezier(0.29,1.44,0.53,1.02)",
             }}
           >
+            {/* "PORTFOLIO" branding in Bebas Neue */}
             <div
-              className="navbar-brand-adwaith text-2xl sm:text-3xl gradient-text-strong uppercase leading-none mb-0.5 font-caveat font-bold"
-              style={{ fontFamily: "'Caveat', cursive", fontWeight: 700 }}
+              className="navbar-brand-adwaith text-2xl sm:text-3xl gradient-text-strong uppercase leading-none mb-0.5 font-bebas font-bold"
+              style={{ fontFamily: "'Bebas Neue', sans-serif", fontWeight: 700 }}
             >
               PORTFOLIO
             </div>
+            {/* "ADWAITH" in Caveat, bold */}
             <div
               className="navbar-brand-adwaith font-caveat font-bold tracking-tight text-5xl sm:text-6xl text-white mt-0 uppercase leading-none"
               style={{ fontFamily: "'Caveat', cursive", fontWeight: 700 }}
@@ -82,9 +85,14 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
 
       {collapsed && (
         <div className="flex items-center justify-between px-8 py-2 max-w-7xl mx-auto h-[70px]">
+          {/* "ADWAITH" in Caveat, bold */}
           <span
             className="navbar-brand-adwaith font-caveat font-bold tracking-tight text-3xl sm:text-4xl text-white select-none uppercase transition-transform duration-[400ms] scale-100 opacity-100"
-            style={{ fontFamily: "'Caveat', cursive", fontWeight: 700, transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)" }}
+            style={{
+              fontFamily: "'Caveat', cursive",
+              fontWeight: 700,
+              transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)"
+            }}
           >
             ADWAITH
           </span>
@@ -108,7 +116,7 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
           <li key={id}>
             <button
               className={cn(
-                "nav-link group hover-scale transition relative font-semibold text-base font-caveat",
+                "nav-link group hover-scale transition relative font-semibold text-base font-caveat font-bold",
                 active === id && "active"
               )}
               onClick={() => onNav(id)}
@@ -140,3 +148,4 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
 };
 
 export default NavBar;
+
