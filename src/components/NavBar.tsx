@@ -1,3 +1,4 @@
+
 import { Home, FileText, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -52,16 +53,16 @@ const NavBar = () => {
     >
       {/* Expanded section: Branding */}
       {!collapsed && (
-        <div className="max-w-7xl mx-auto flex flex-col items-start justify-center px-8 pt-6 pb-4 h-full">
+        <div className="max-w-7xl mx-auto flex flex-col items-start justify-center px-8 pt-2 pb-1 h-full">
           <div
-            className="text-portfolio-gradient-from font-bebas text-[1.6rem] tracking-[0.11em] select-none leading-none"
-            style={{ letterSpacing: "0.11em" }}
+            className="text-portfolio-gradient-from font-bebas text-[1.3rem] tracking-[0.11em] select-none leading-none"
+            style={{ letterSpacing: "0.11em", marginBottom: "0.2rem"}}
           >
             PORTFOLIO PAGE
           </div>
           <div
-            className="font-bebas text-5xl sm:text-6xl tracking-wider text-white leading-tight select-none uppercase mt-2"
-            style={{ letterSpacing: "0.15em" }}
+            className="font-bebas text-4xl sm:text-5xl tracking-wider text-white leading-none select-none uppercase mt-1"
+            style={{ letterSpacing: "0.15em", lineHeight: "1.08" }}
           >
             ADWAITH
           </div>
@@ -73,9 +74,6 @@ const NavBar = () => {
         <div className="flex items-center justify-between px-8 py-2 max-w-7xl mx-auto h-[70px]">
           <span className="text-2xl font-bebas gradient-text tracking-[0.09em] select-none uppercase">
             ADWAITH
-            <span className="text-lg font-bebas align-super ml-2 uppercase text-portfolio-gradient-from tracking-normal">
-              Portfolio
-            </span>
           </span>
         </div>
       )}
