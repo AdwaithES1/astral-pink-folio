@@ -16,6 +16,7 @@ const Index = () => {
     <div className="relative min-h-screen w-full bg-deep-black overflow-x-hidden">
       {/* Navbar always shown */}
       <NavBar burstAnim={false} />
+
       {/* Hero Section */}
       <div
         id="home"
@@ -23,29 +24,23 @@ const Index = () => {
       >
         <Main3DLaptop />
         <h1
-          className={`text-5xl font-extrabold mb-2 mt-8 gradient-text-strong animate-fast-pop-in ${
+          className={`shine-heading text-5xl font-extrabold mb-2 mt-8 animate-fast-pop-in ${
             animateHero ? "show-fast-pop-in" : ""
           }`}
           style={{ zIndex: 3 }}
         >
-          Adwaith
+          Curious about me?
         </h1>
         <h2
           className={`text-xl text-zinc-300 max-w-2xl mx-auto text-center mb-4 font-sans animate-fast-pop-in ${
             animateHero ? "show-fast-pop-in" : ""
           }`}
         >
-          An AI/ML geek who enjoys teaching machines to do my chores—one real-world solution at a time!
+          Am an AI/ML geek who enjoys teaching machines to do my chores—one real-world solution at a time!
         </h2>
       </div>
       <main className={`w-full max-w-5xl mx-auto`}>
-        <Section id="about" title="About">
-          <div className={`animate-fast-pop-in ${animateHero ? "show-fast-pop-in" : ""}`}>
-            <p>
-              An AI/ML geek who enjoys teaching machines to do my chores—one real-world solution at a time!
-            </p>
-          </div>
-        </Section>
+        {/* About section removed */}
         <Section id="works" title="Works">
           <div className={`animate-fast-pop-in ${animateHero ? "show-fast-pop-in" : ""}`}>
             <p>Some featured projects coming soon!</p>
@@ -81,3 +76,4 @@ const Index = () => {
 };
 
 export default Index;
+
