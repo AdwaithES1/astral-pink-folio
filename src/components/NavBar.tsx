@@ -1,4 +1,3 @@
-
 import { Home, FileText, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -59,27 +58,98 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
         <div className="max-w-7xl mx-auto flex flex-col items-start justify-center px-8 pt-2 pb-1 h-full relative">
           {/* Contact icons & info, top right */}
           <div className="absolute top-[10px] right-0 pr-4 flex flex-col items-end gap-1 z-20">
-            <div className="flex items-center gap-1 text-white text-sm font-normal">
+            <div className="flex items-center gap-1 text-sm font-normal">
               {/* Gmail icon and email */}
-              <svg width={18} height={18} viewBox="0 0 24 24" fill="none" className="mr-1 text-red-400" aria-label="Gmail">
+              <svg
+                width={18}
+                height={18}
+                viewBox="0 0 24 24"
+                fill="none"
+                className="mr-1"
+                aria-label="Gmail"
+              >
                 <g>
                   <rect width="24" height="24" rx="4" fill="#fff" />
-                  <path d="M3.4 7.07L12 13.37l8.6-6.3a1 1 0 0 0-1.2-1.6L12 10.63 4.6 5.47a1 1 0 1 0-1.2 1.6z" fill="#EA4335"/>
-                  <path d="M21 6.88l-8.6 6.27a1 1 0 0 1-1.2 0L3 6.88V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.88z" fill="#4285F4"/>
-                  <path d="M3 6.88v11.02A2 2 0 0 0 5 20h14a2 2 0 0 0 2-2V6.88l-8.6 6.31a1.5 1.5 0 0 1-1.8 0L3 6.88z" fill="#34A853" fillOpacity=".5"/>
+                  <path
+                    d="M3.4 7.07L12 13.37l8.6-6.3a1 1 0 0 0-1.2-1.6L12 10.63 4.6 5.47a1 1 0 1 0-1.2 1.6z"
+                    fill="url(#gmail-pink)"
+                  />
+                  <path
+                    d="M21 6.88l-8.6 6.27a1 1 0 0 1-1.2 0L3 6.88V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.88z"
+                    fill="url(#gmail-blue)"
+                  />
+                  <path
+                    d="M3 6.88v11.02A2 2 0 0 0 5 20h14a2 2 0 0 0 2-2V6.88l-8.6 6.31a1.5 1.5 0 0 1-1.8 0L3 6.88z"
+                    fill="url(#gmail-green)"
+                    fillOpacity=".55"
+                  />
+                  <defs>
+                    <linearGradient id="gmail-pink" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#ff3796" />
+                      <stop offset="0.7" stopColor="#ff90e8" />
+                    </linearGradient>
+                    <linearGradient id="gmail-blue" x1="3" y1="6" x2="21" y2="17" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#a7c7ff" />
+                      <stop offset="1" stopColor="#1e3a8a"/>
+                    </linearGradient>
+                    <linearGradient id="gmail-green" x1="3" y1="13" x2="21" y2="23" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#ff90e8" />
+                      <stop offset="1" stopColor="#fff4fa" />
+                    </linearGradient>
+                  </defs>
                 </g>
               </svg>
-              <span className="font-sans select-text text-xs sm:text-sm">adwaithe6@gmail.com</span>
+              <span
+                className="font-sans select-text text-xs sm:text-sm"
+                style={{
+                  background: "linear-gradient(90deg,#fff 50%,#ff90e8 95%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  fontWeight: 700,
+                  letterSpacing: "0.01em"
+                }}
+              >
+                adwaithe6@gmail.com
+              </span>
             </div>
-            <div className="flex items-center gap-1 text-white text-sm font-normal mt-0.5">
+            <div className="flex items-center gap-1 text-sm font-normal mt-0.5">
               {/* WhatsApp icon and number */}
-              <svg width={18} height={18} viewBox="0 0 24 24" fill="none" className="mr-1 text-[#25D366]" aria-label="WhatsApp">
+              <svg
+                width={18}
+                height={18}
+                viewBox="0 0 24 24"
+                fill="none"
+                className="mr-1"
+                aria-label="WhatsApp"
+              >
                 <g>
                   <rect width="24" height="24" rx="4" fill="#fff" />
-                  <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.967-.94 1.166-.173.198-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.789-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.447-.52.149-.174.199-.298.299-.497.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.207-.242-.58-.487-.502-.669-.512l-.569-.01c-.198 0-.521.074-.793.372s-1.04 1.017-1.04 2.479 1.065 2.876 1.214 3.074c.148.198 2.097 3.213 5.077 4.377.71.306 1.262.488 1.694.623.712.226 1.36.194 1.87.118.572-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.413-.074-.124-.272-.198-.569-.347z"/>
+                  <path
+                    fill="url(#wa-blue)"
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.967-.94 1.166-.173.198-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.789-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.447-.52.149-.174.199-.298.299-.497.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.207-.242-.58-.487-.502-.669-.512l-.569-.01c-.198 0-.521.074-.793.372s-1.04 1.017-1.04 2.479 1.065 2.876 1.214 3.074c.148.198 2.097 3.213 5.077 4.377.71.306 1.262.488 1.694.623.712.226 1.36.194 1.87.118.572-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.413-.074-.124-.272-.198-.569-.347z"
+                  />
+                  <defs>
+                    <linearGradient id="wa-blue" x1="9" y1="10" x2="21" y2="24" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#1e3a8a" />
+                      <stop offset="1" stopColor="#80eaff" />
+                    </linearGradient>
+                  </defs>
                 </g>
               </svg>
-              <span className="font-sans select-text text-xs sm:text-sm">999999999</span>
+              <span
+                className="font-sans select-text text-xs sm:text-sm"
+                style={{
+                  background: "linear-gradient(90deg,#fff 62%,#ff90e8 100%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  fontWeight: 700,
+                  letterSpacing: "0.01em"
+                }}
+              >
+                999999999
+              </span>
             </div>
           </div>
           <div
@@ -173,4 +243,3 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
 };
 
 export default NavBar;
-
