@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -34,6 +35,7 @@ export default {
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui"],
         bebas: ["Bebas Neue", "sans-serif"],
+        pacifico: ["Pacifico", "cursive"], // <-- Added this line
       },
       animation: {
         "icon-float": "icon-float 4s ease-in-out infinite",
@@ -48,3 +50,4 @@ export default {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+

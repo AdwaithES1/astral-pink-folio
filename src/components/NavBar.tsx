@@ -1,3 +1,4 @@
+
 import { Home, FileText, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -58,7 +59,7 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
         <div className="max-w-7xl mx-auto flex flex-col items-start justify-center px-8 pt-2 pb-1 h-full">
           <div
             className={cn(
-              "transition-transform duration-[520ms] scale-100 opacity-100 select-none",
+              "transition-transform duration-[520ms] scale-100 opacity-100 select-none"
             )}
             style={{
               transition: "all 0.52s cubic-bezier(0.29,1.44,0.53,1.02)",
@@ -70,7 +71,8 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
               PORTFOLIO
             </div>
             <div
-              className="navbar-brand-adwaith text-5xl sm:text-6xl text-white mt-0 uppercase leading-none"
+              // Apply Pacifico font and bold
+              className="navbar-brand-adwaith font-pacifico font-bold tracking-tight text-5xl sm:text-6xl text-white mt-0 uppercase leading-none"
             >
               ADWAITH
             </div>
@@ -82,10 +84,11 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
         <div className="flex items-center justify-between px-8 py-2 max-w-7xl mx-auto h-[70px]">
           <span
             className={cn(
-              "navbar-brand-adwaith text-3xl sm:text-4xl text-white select-none uppercase transition-transform duration-[400ms] scale-100 opacity-100"
+              // Apply Pacifico font and bold
+              "navbar-brand-adwaith font-pacifico font-bold tracking-tight text-3xl sm:text-4xl text-white select-none uppercase transition-transform duration-[400ms] scale-100 opacity-100"
             )}
             style={{
-              transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)"
+              transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)",
             }}
           >
             ADWAITH
@@ -142,3 +145,4 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
 };
 
 export default NavBar;
+
