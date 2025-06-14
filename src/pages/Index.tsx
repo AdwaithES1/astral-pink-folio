@@ -112,28 +112,28 @@ const Index = () => {
                   My Github
                 </a>
               </div>
-            </div>
-            {/* On mobile, show Github link as a block below, with ONLY ONE "more at" */}
-            <div className="flex sm:hidden justify-end mt-5 w-full">
-              <span
-                className="font-caveat text-lg text-white opacity-85 mr-1 select-none"
-                style={{
-                  fontFamily: "'Caveat', cursive",
-                  letterSpacing: "0.01em"
-                }}
-              >
-                more at
-              </span>
-              <a
-                href="https://github.com/yourgithub"
-                target="_blank"
-                rel="noopener"
-                className="flex flex-row items-center gap-2 text-zinc-400 hover:text-electric-pink font-medium border border-zinc-800 bg-black/70 px-4 py-2 rounded-xl shadow transition-all"
-                style={{ boxShadow: "0 3px 12px #0007" }}
-              >
-                <Github size={20} className="mr-1" />
-                My Github
-              </a>
+              {/* On mobile, show Github link as a block below, with ONLY ONE "more at" */}
+              <div className="flex sm:hidden justify-end mt-5 w-full">
+                <a
+                  href="https://github.com/yourgithub"
+                  target="_blank"
+                  rel="noopener"
+                  className="flex flex-row items-center gap-2 text-zinc-400 hover:text-electric-pink font-medium border border-zinc-800 bg-black/70 px-4 py-2 rounded-xl shadow transition-all"
+                  style={{ boxShadow: "0 3px 12px #0007" }}
+                >
+                  <span
+                    className="font-caveat text-lg text-white opacity-85 mr-1 select-none"
+                    style={{
+                      fontFamily: "'Caveat', cursive",
+                      letterSpacing: "0.01em"
+                    }}
+                  >
+                    more at
+                  </span>
+                  <Github size={20} className="mr-1" />
+                  My Github
+                </a>
+              </div>
             </div>
           </PopInOnView>
         </Section>
