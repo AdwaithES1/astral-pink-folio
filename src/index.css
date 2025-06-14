@@ -100,6 +100,39 @@ html {
   transition: none;
 }
 
+/* Slight, subtle pop-in animation for post-hero sections */
+@keyframes soft-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.98) translateY(22px);
+    filter: blur(2.1px);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.015) translateY(-3px);
+    filter: blur(0);
+  }
+  90% {
+    transform: scale(1) translateY(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+.animate-soft-pop-in {
+  opacity: 0;
+  /* remains hidden until .show-fast-pop-in is added (reuse show class for triggering) */
+  will-change: opacity, transform, filter;
+  transition: none;
+}
+.animate-soft-pop-in.show-fast-pop-in {
+  animation: soft-pop-in 0.57s cubic-bezier(0.29,1.12,0.53,1) both;
+  opacity: 1 !important;
+  transition: none;
+}
+
 /* Shining animation for headings */
 @keyframes shine {
   0% {
@@ -317,3 +350,5 @@ html {
 }
 
 /* Old .super-gradient-heading, .heading-gradient-shine etc remain unchanged, for other use */
+
+</initial_code>

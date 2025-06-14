@@ -40,12 +40,12 @@ const Index = () => {
       <main className={`w-full max-w-5xl mx-auto`}>
         {/* About section removed */}
         <Section id="works" title="Works">
-          <PopInOnView>
+          <PopInOnView thresholdClass="animate-soft-pop-in">
             <p>Some featured projects coming soon!</p>
           </PopInOnView>
         </Section>
         <Section id="resume" title="Resume">
-          <PopInOnView>
+          <PopInOnView thresholdClass="animate-soft-pop-in">
             <a
               href="#"
               className="underline transition hover:text-electric-pink"
@@ -56,7 +56,7 @@ const Index = () => {
           </PopInOnView>
         </Section>
         <Section id="contact" title="Contact">
-          <PopInOnView>
+          <PopInOnView thresholdClass="animate-soft-pop-in">
             <p>
               Email: <a href="mailto:adwaith@example.com" className="text-electric-pink underline">adwaith@example.com</a>
             </p>

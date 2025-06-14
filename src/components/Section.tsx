@@ -10,11 +10,12 @@ type SectionProps = {
 const Section = forwardRef<HTMLDivElement, SectionProps>(
   ({ id, title, children }, ref) => (
     <section id={id} ref={ref} className="section-card">
-      {/* Always readable, Bebas Neue bold, white-pink with shine gradient INSIDE text */}
-      <PopInOnView as="h2" className="bebas-gradient-heading text-4xl sm:text-5xl font-bold mb-4">
+      {/* Section titles: still dramatic */}
+      <PopInOnView as="h2" className="bebas-gradient-heading text-4xl sm:text-5xl font-bold mb-4" thresholdClass="animate-fast-pop-in">
         {title}
       </PopInOnView>
       <div className="text-zinc-100">
+        {/* Children decide their pop in: usually soft unless overridden */}
         {children}
       </div>
     </section>
