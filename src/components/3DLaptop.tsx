@@ -14,40 +14,46 @@ function FuturisticLaptop() {
     if (powerHoloRef.current) {
       const t = clock.getElapsedTime();
       powerHoloRef.current.position.y = 0.85 + Math.sin(t * 2.4) * 0.09;
-      powerHoloRef.current.material.opacity = 0.25 + 0.12 * Math.sin(t * 2.2 + 0.7);
+      (powerHoloRef.current.material as THREE.MeshStandardMaterial).opacity =
+        0.25 + 0.12 * Math.sin(t * 2.2 + 0.7);
     }
     // Subtle shimmer for neon lines
     if (neonLinesRef.current) {
       const t = clock.getElapsedTime();
-      neonLinesRef.current.material.opacity = 0.32 + 0.13 * Math.sin(t * 3.1);
+      (neonLinesRef.current.material as THREE.MeshBasicMaterial).opacity =
+        0.32 + 0.13 * Math.sin(t * 3.1);
     }
   });
 
   return (
     <group>
       {/* FLOATING PARALLAX SHADOW */}
-      <mesh position={[0, -0.52, -0.28]} rotation={[-0.41, 0, 0]}>
-        <ellipseGeometry args={[2.6, 0.7, 54]} />
-        <meshBasicMaterial
-          attach="material"
-          args={[{ color: "#0e0a2f", opacity: 0.39, transparent: true }]}
-        />
+      <mesh position={[0, -0.52, -0.28]} rotation={[-0.41, 0, 0]} scale={[2.6, 0.7, 1]}>
+        <circleGeometry args={[1, 54]} />
+        <meshBasicMaterial color="#0e0a2f" transparent opacity={0.39} />
       </mesh>
 
       {/* BASE - Metallic chassis, chunky */}
       <mesh position={[0, -0.35, 0]} castShadow receiveShadow>
         <boxGeometry args={[2.72, 0.13, 1.4]} />
         <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#13122b", metalness: 0.98, roughness: 0.13, envMapIntensity: 1.9 }]}
+          color="#13122b"
+          metalness={0.98}
+          roughness={0.13}
+          envMapIntensity={1.9}
         />
       </mesh>
       {/* Glowing edge wrap */}
       <mesh position={[0, -0.293, 0]} castShadow>
         <boxGeometry args={[2.77, 0.02, 1.41]} />
         <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#1e3a8a", emissive: "#1e3a8a", metalness: 0.7, roughness: 0.07, emissiveIntensity: 0.4, opacity: 0.22, transparent: true }]}
+          color="#1e3a8a"
+          emissive="#1e3a8a"
+          metalness={0.7}
+          roughness={0.07}
+          emissiveIntensity={0.4}
+          transparent
+          opacity={0.22}
         />
       </mesh>
 
@@ -55,8 +61,11 @@ function FuturisticLaptop() {
       <mesh position={[0, -0.243, 0.18]} receiveShadow>
         <boxGeometry args={[1.75, 0.013, 0.46]} />
         <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#182050", emissive: "#ff3796", emissiveIntensity: 0.17, metalness: 1, roughness: 0.32 }]}
+          color="#182050"
+          emissive="#ff3796"
+          emissiveIntensity={0.17}
+          metalness={1}
+          roughness={0.32}
         />
       </mesh>
       {/* Keys (rows, glowing pulse) */}
@@ -72,7 +81,6 @@ function FuturisticLaptop() {
           >
             <boxGeometry args={[0.085, 0.018, 0.07]} />
             <meshStandardMaterial
-              attach="material"
               color="#19143f"
               metalness={0.7}
               roughness={0.24}
@@ -89,7 +97,6 @@ function FuturisticLaptop() {
       <mesh position={[0, -0.213, 0.21]}>
         <boxGeometry args={[1.77, 0.015, 0.49]} />
         <meshBasicMaterial
-          attach="material"
           color="#ff90e8"
           wireframe
           opacity={0.22}
@@ -101,8 +108,11 @@ function FuturisticLaptop() {
       <mesh position={[0, -0.19, -0.71]}>
         <cylinderGeometry args={[0.09, 0.08, 2.1, 40]} />
         <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#161450", metalness: 0.9, roughness: 0.18, emissive: "#ff3796", emissiveIntensity: 0.15 }]}
+          color="#161450"
+          metalness={0.9}
+          roughness={0.18}
+          emissive="#ff3796"
+          emissiveIntensity={0.15}
         />
       </mesh>
 
@@ -110,24 +120,34 @@ function FuturisticLaptop() {
       <mesh position={[0, 0.76, -0.53]} rotation={[-0.25, 0, 0]}>
         <boxGeometry args={[2.04, 1.22, 0.11]} />
         <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#101059", roughness: 0.10, metalness: 0.88, envMapIntensity: 1.5 }]}
+          color="#101059"
+          roughness={0.10}
+          metalness={0.88}
+          envMapIntensity={1.5}
         />
       </mesh>
       {/* SCREEN GLOW edge */}
       <mesh position={[0, 0.76, -0.474]} rotation={[-0.25, 0, 0]}>
         <boxGeometry args={[2.10, 1.255, 0.01]} />
         <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#ff3796", metalness: 0.81, roughness: 0.06, transparent: true, opacity: 0.082, emissive: "#ff3796", emissiveIntensity: 0.26 }]}
+          color="#ff3796"
+          metalness={0.81}
+          roughness={0.06}
+          transparent
+          opacity={0.082}
+          emissive="#ff3796"
+          emissiveIntensity={0.26}
         />
       </mesh>
       {/* Parallax reflection layer */}
       <mesh position={[0.13, 0.79, -0.495]} rotation={[-0.25, 0.05, 0]}>
         <planeGeometry args={[2.01, 1.18]} />
         <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#fff", transparent: true, opacity: 0.09, metalness: 1, roughness: 0 }]}
+          color="#fff"
+          transparent
+          opacity={0.09}
+          metalness={1}
+          roughness={0}
         />
       </mesh>
 
@@ -136,8 +156,11 @@ function FuturisticLaptop() {
       <mesh position={[0, 0.778, -0.49]} rotation={[-0.25, 0, 0]}>
         <planeGeometry args={[1.91, 1.14]} />
         <meshStandardMaterial
-          attach="material"
-          args={[{ color: "#1e3a8a", roughness: 0.09, metalness: 0.5, emissive: "#19186e", emissiveIntensity: 0.13 }]}
+          color="#1e3a8a"
+          roughness={0.09}
+          metalness={0.5}
+          emissive="#19186e"
+          emissiveIntensity={0.13}
         />
       </mesh>
 
@@ -145,7 +168,6 @@ function FuturisticLaptop() {
       <mesh position={[0, 0.98, -0.47]}>
         <sphereGeometry args={[0.21, 42, 42]} />
         <meshStandardMaterial
-          attach="material"
           color="#ff3796"
           emissive="#ff3796"
           metalness={0.85}
@@ -157,7 +179,6 @@ function FuturisticLaptop() {
       <mesh position={[0, 0.98, -0.46]}>
         <sphereGeometry args={[0.34, 30, 30]} />
         <meshBasicMaterial
-          attach="material"
           color="#ff3796"
           transparent
           opacity={0.13}
@@ -168,7 +189,6 @@ function FuturisticLaptop() {
         <mesh key={idx} position={[0, 0.98, -0.44]} rotation={[0, 0, rot]}>
           <torusGeometry args={[0.28 + 0.015 * idx, 0.012 + 0.006 * idx, 18, 52]} />
           <meshStandardMaterial
-            attach="material"
             color="#1e3a8a"
             metalness={1}
             roughness={0.28}
@@ -185,7 +205,6 @@ function FuturisticLaptop() {
       <mesh ref={neonLinesRef} position={[0, 0.56, -0.38]}>
         <planeGeometry args={[0.95, 0.045]} />
         <meshBasicMaterial
-          attach="material"
           color="#ff3796"
           opacity={0.32}
           transparent
@@ -199,7 +218,6 @@ function FuturisticLaptop() {
       >
         <planeGeometry args={[0.33, 0.45]} />
         <meshStandardMaterial
-          attach="material"
           color="#fff"
           roughness={0.28}
           metalness={0.0}
@@ -218,7 +236,6 @@ function FuturisticLaptop() {
         >
           <boxGeometry args={[0.15, 0.04, 0.09]} />
           <meshStandardMaterial
-            attach="material"
             color="#1e3a8a"
             roughness={0.39}
             metalness={0.92}
