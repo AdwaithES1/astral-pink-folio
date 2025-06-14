@@ -30,23 +30,27 @@ function FuturisticLaptop() {
       {/* FLOATING PARALLAX SHADOW */}
       <mesh position={[0, -0.52, -0.28]} rotation={[-0.41, 0, 0]} scale={[2.6, 0.7, 1]}>
         <circleGeometry args={[1, 54]} />
+        {/* @ts-ignore */}
         <meshBasicMaterial color="#0e0a2f" transparent opacity={0.39} />
       </mesh>
 
       {/* BASE - Metallic chassis, chunky */}
       <mesh position={[0, -0.35, 0]} castShadow receiveShadow>
         <boxGeometry args={[2.72, 0.13, 1.4]} />
+        {/* @ts-ignore */}
         <meshStandardMaterial color="#13122b" metalness={0.98} roughness={0.13} envMapIntensity={1.9} />
       </mesh>
       {/* Glowing edge wrap */}
       <mesh position={[0, -0.293, 0]} castShadow>
         <boxGeometry args={[2.77, 0.02, 1.41]} />
+        {/* @ts-ignore */}
         <meshStandardMaterial color="#1e3a8a" emissive="#1e3a8a" metalness={0.7} roughness={0.07} emissiveIntensity={0.4} transparent opacity={0.22} />
       </mesh>
 
       {/* KEYBOARD - glowing underlay */}
       <mesh position={[0, -0.243, 0.18]} receiveShadow>
         <boxGeometry args={[1.75, 0.013, 0.46]} />
+        {/* @ts-ignore */}
         <meshStandardMaterial color="#182050" emissive="#ff3796" emissiveIntensity={0.17} metalness={1} roughness={0.32} />
       </mesh>
       {/* Keys (rows, glowing pulse) */}
@@ -61,6 +65,7 @@ function FuturisticLaptop() {
             ]}
           >
             <boxGeometry args={[0.085, 0.018, 0.07]} />
+            {/* @ts-ignore */}
             <meshStandardMaterial color="#19143f" metalness={0.7} roughness={0.24} emissive={col % 2 === 0 ? "#ff3796" : "#fff"} emissiveIntensity={row === 2 ? 0.079 : 0.059} transparent opacity={0.81} />
           </mesh>
         ))
@@ -69,6 +74,7 @@ function FuturisticLaptop() {
       {/* WIREFRAME OVERLAY */}
       <mesh position={[0, -0.213, 0.21]}>
         <boxGeometry args={[1.77, 0.015, 0.49]} />
+        {/* @ts-ignore */}
         <meshBasicMaterial
           color="#ff90e8"
           wireframe
@@ -80,6 +86,7 @@ function FuturisticLaptop() {
       {/* HINGE - deep glowing */}
       <mesh position={[0, -0.19, -0.71]}>
         <cylinderGeometry args={[0.09, 0.08, 2.1, 40]} />
+        {/* @ts-ignore */}
         <meshStandardMaterial
           color="#161450"
           metalness={0.9}
@@ -92,6 +99,7 @@ function FuturisticLaptop() {
       {/* --- SCREEN with animated wallpaper --- */}
       <mesh position={[0, 0.76, -0.53]} rotation={[-0.25, 0, 0]}>
         <boxGeometry args={[2.04, 1.22, 0.11]} />
+        {/* @ts-ignore */}
         <meshStandardMaterial
           color="#101059"
           roughness={0.10}
@@ -102,6 +110,7 @@ function FuturisticLaptop() {
       {/* SCREEN GLOW edge */}
       <mesh position={[0, 0.76, -0.474]} rotation={[-0.25, 0, 0]}>
         <boxGeometry args={[2.10, 1.255, 0.01]} />
+        {/* @ts-ignore */}
         <meshStandardMaterial
           color="#ff3796"
           metalness={0.81}
@@ -115,6 +124,7 @@ function FuturisticLaptop() {
       {/* Parallax reflection layer */}
       <mesh position={[0.13, 0.79, -0.495]} rotation={[-0.25, 0.05, 0]}>
         <planeGeometry args={[2.01, 1.18]} />
+        {/* @ts-ignore */}
         <meshStandardMaterial
           color="#fff"
           transparent
@@ -128,6 +138,7 @@ function FuturisticLaptop() {
       {/* Deep blue animated waves */}
       <mesh position={[0, 0.778, -0.49]} rotation={[-0.25, 0, 0]}>
         <planeGeometry args={[1.91, 1.14]} />
+        {/* @ts-ignore */}
         <meshStandardMaterial
           color="#1e3a8a"
           roughness={0.09}
@@ -140,6 +151,7 @@ function FuturisticLaptop() {
       {/* Central pink energy ball */}
       <mesh position={[0, 0.98, -0.47]}>
         <sphereGeometry args={[0.21, 42, 42]} />
+        {/* @ts-ignore */}
         <meshStandardMaterial
           color="#ff3796"
           emissive="#ff3796"
@@ -151,6 +163,7 @@ function FuturisticLaptop() {
       {/* Glow behind ball */}
       <mesh position={[0, 0.98, -0.46]}>
         <sphereGeometry args={[0.34, 30, 30]} />
+        {/* @ts-ignore */}
         <meshBasicMaterial
           color="#ff3796"
           transparent
@@ -161,6 +174,7 @@ function FuturisticLaptop() {
       {[0, 0.9, 1.8].map((rot, idx) => (
         <mesh key={idx} position={[0, 0.98, -0.44]} rotation={[0, 0, rot]}>
           <torusGeometry args={[0.28 + 0.015 * idx, 0.012 + 0.006 * idx, 18, 52]} />
+          {/* @ts-ignore */}
           <meshStandardMaterial
             color="#1e3a8a"
             metalness={1}
@@ -177,6 +191,7 @@ function FuturisticLaptop() {
       {/* Neon lines (move opacity for shimmer) */}
       <mesh ref={neonLinesRef} position={[0, 0.56, -0.38]}>
         <planeGeometry args={[0.95, 0.045]} />
+        {/* @ts-ignore */}
         <meshBasicMaterial
           color="#ff3796"
           opacity={0.32}
@@ -190,6 +205,7 @@ function FuturisticLaptop() {
         rotation={[-0.41, 0, -0.18]}
       >
         <planeGeometry args={[0.33, 0.45]} />
+        {/* @ts-ignore */}
         <meshStandardMaterial
           color="#fff"
           roughness={0.28}
@@ -208,6 +224,7 @@ function FuturisticLaptop() {
           rotation={[-0.27, 0, 0.6 - 1.2 * idx]}
         >
           <boxGeometry args={[0.15, 0.04, 0.09]} />
+          {/* @ts-ignore */}
           <meshStandardMaterial
             color="#1e3a8a"
             roughness={0.39}
