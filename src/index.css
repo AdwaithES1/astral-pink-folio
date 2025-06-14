@@ -177,3 +177,65 @@ html {
   mix-blend-mode: lighten;
   letter-spacing: 0.04em;
 }
+
+/* --- BASE GRADIENT HEADING: Always readable, white-pink gradient --- */
+.super-gradient-heading {
+  position: relative;
+  display: inline-block;
+  /* Solid, highly readable base (white -> pink gradient) */
+  background: linear-gradient(90deg, #fff 25%, #ff3796 60%, #ff90e8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  /* Make sure it's always visible */
+  z-index: 0;
+}
+
+/* --- SHINE OVERLAY: deep blue/dark pink, moving every 3s --- */
+.super-gradient-heading::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  /* The moving shine gradient (slightly see-through) */
+  background: linear-gradient(90deg,
+    transparent 5%,
+    #1e3a8a 28%,
+    #ff3796 45%,
+    #ff90e8 65%,
+    transparent 83%
+  );
+  background-size: 370px 100%;
+  background-repeat: no-repeat;
+  mix-blend-mode: lighten; /* blend for shine, not full mask */
+  opacity: 0.7;
+  pointer-events: none;
+  /* Animate left to right */
+  animation: heading-shine-move 3s linear infinite;
+}
+
+/* Keyframes for shine overlay */
+@keyframes heading-shine-move {
+  0% {
+    background-position: -370px 0;
+    opacity: 0.7;
+  }
+  14% { /* quickly glides in */
+    opacity: 1;
+  }
+  60% {
+    background-position: 370px 0;
+    opacity: 1;
+  }
+  77% {
+    opacity: 0.7; /* fade out softly */
+  }
+  100% {
+    background-position: 370px 0;
+    opacity: 0.7;
+  }
+}

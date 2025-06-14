@@ -1,4 +1,3 @@
-
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import * as THREE from "three";
@@ -30,43 +29,25 @@ function FuturisticLaptop() {
       {/* FLOATING PARALLAX SHADOW */}
       <mesh position={[0, -0.52, -0.28]} rotation={[-0.41, 0, 0]} scale={[2.6, 0.7, 1]}>
         <circleGeometry args={[1, 54]} />
-        <meshBasicMaterial color="#0e0a2f" transparent opacity={0.39} />
+        {/* meshBasicMaterial uses "color" prop directly, TypeScript fix */}
+        <meshBasicMaterial attach="material" color="#0e0a2f" transparent opacity={0.39} />
       </mesh>
 
       {/* BASE - Metallic chassis, chunky */}
       <mesh position={[0, -0.35, 0]} castShadow receiveShadow>
         <boxGeometry args={[2.72, 0.13, 1.4]} />
-        <meshStandardMaterial
-          color="#13122b"
-          metalness={0.98}
-          roughness={0.13}
-          envMapIntensity={1.9}
-        />
+        <meshStandardMaterial attach="material" color="#13122b" metalness={0.98} roughness={0.13} envMapIntensity={1.9} />
       </mesh>
       {/* Glowing edge wrap */}
       <mesh position={[0, -0.293, 0]} castShadow>
         <boxGeometry args={[2.77, 0.02, 1.41]} />
-        <meshStandardMaterial
-          color="#1e3a8a"
-          emissive="#1e3a8a"
-          metalness={0.7}
-          roughness={0.07}
-          emissiveIntensity={0.4}
-          transparent
-          opacity={0.22}
-        />
+        <meshStandardMaterial attach="material" color="#1e3a8a" emissive="#1e3a8a" metalness={0.7} roughness={0.07} emissiveIntensity={0.4} transparent opacity={0.22} />
       </mesh>
 
       {/* KEYBOARD - glowing underlay */}
       <mesh position={[0, -0.243, 0.18]} receiveShadow>
         <boxGeometry args={[1.75, 0.013, 0.46]} />
-        <meshStandardMaterial
-          color="#182050"
-          emissive="#ff3796"
-          emissiveIntensity={0.17}
-          metalness={1}
-          roughness={0.32}
-        />
+        <meshStandardMaterial attach="material" color="#182050" emissive="#ff3796" emissiveIntensity={0.17} metalness={1} roughness={0.32} />
       </mesh>
       {/* Keys (rows, glowing pulse) */}
       {[...Array(4)].map((_, row) =>
@@ -80,15 +61,7 @@ function FuturisticLaptop() {
             ]}
           >
             <boxGeometry args={[0.085, 0.018, 0.07]} />
-            <meshStandardMaterial
-              color="#19143f"
-              metalness={0.7}
-              roughness={0.24}
-              emissive={col % 2 === 0 ? "#ff3796" : "#fff"}
-              emissiveIntensity={row === 2 ? 0.079 : 0.059}
-              transparent
-              opacity={0.81}
-            />
+            <meshStandardMaterial attach="material" color="#19143f" metalness={0.7} roughness={0.24} emissive={col % 2 === 0 ? "#ff3796" : "#fff"} emissiveIntensity={row === 2 ? 0.079 : 0.059} transparent opacity={0.81} />
           </mesh>
         ))
       )}

@@ -1,4 +1,3 @@
-
 import NavBar from "@/components/NavBar";
 import Main3DLaptop from "@/components/3DLaptop";
 import Section from "@/components/Section";
@@ -23,8 +22,9 @@ const Index = () => {
         className={`pt-[170px] relative flex flex-col items-center gap-3 z-[1]`}
       >
         <Main3DLaptop />
+        {/* New super-gradient-heading for hero title */}
         <h1
-          className={`heading-gradient-shine text-5xl font-extrabold mb-2 mt-8 animate-fast-pop-in ${
+          className={`super-gradient-heading text-5xl font-extrabold mb-2 mt-8 animate-fast-pop-in ${
             animateHero ? "show-fast-pop-in" : ""
           }`}
           style={{ zIndex: 3 }}
