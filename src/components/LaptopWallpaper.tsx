@@ -6,11 +6,9 @@ import * as THREE from "three";
 // Animated dark wallpaper with a bouncing pink ball
 export default function LaptopWallpaper() {
   const ballRef = useRef<THREE.Mesh>(null!);
-  // Simple state: ball bounces up/down and drifts a little side to side.
-  // Use a ref for time.
   const timeRef = useRef(0);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     timeRef.current += delta;
     const t = timeRef.current;
     // Ball bounces smoothly on y
@@ -28,27 +26,29 @@ export default function LaptopWallpaper() {
 
   return (
     <group>
-      {/* Dark glossy base */}
+      {/* Futuristic dark glossy wallpaper */}
       <mesh position={[0, 0, 0.01]}>
         <planeGeometry args={[1.85, 1.02]} />
-        <meshStandardMaterial color="#18121e" roughness={0.18} metalness={0.7}
-          emissive="#281a3a" emissiveIntensity={0.18} />
+        <meshStandardMaterial
+          attach="material"
+          args={[{ color: "#18121e", roughness: 0.13, metalness: 0.84, emissive: "#110d15", emissiveIntensity: 0.19 }]}
+        />
       </mesh>
-      {/* Pink ball */}
+      {/* Bouncing pink ball */}
       <mesh ref={ballRef} position={[0, 0.25, 0.044]}>
         <sphereGeometry args={[0.17, 48, 48]} />
         <meshStandardMaterial
-          color="#ff3796"
-          emissive="#ff3796"
-          roughness={0.17}
-          metalness={0.7}
-          emissiveIntensity={0.93}
+          attach="material"
+          args={[{ color: "#ff3796", emissive: "#ff3796", roughness: 0.17, metalness: 0.74, emissiveIntensity: 0.98 }]}
         />
       </mesh>
       {/* Ball glow/effect */}
       <mesh position={[0, 0.25, 0.04]}>
         <sphereGeometry args={[0.26, 36, 36]} />
-        <meshBasicMaterial color="#ff3796" transparent opacity={0.16} />
+        <meshBasicMaterial
+          attach="material"
+          args={[{ color: "#ff3796", transparent: true, opacity: 0.17 }]}
+        />
       </mesh>
     </group>
   );

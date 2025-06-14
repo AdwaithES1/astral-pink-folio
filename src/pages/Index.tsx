@@ -1,4 +1,3 @@
-
 // MODERN PORTFOLIO: DESKTOP-FIRST
 
 import NavBar from "@/components/NavBar";
@@ -11,7 +10,10 @@ const Index = () => {
       <NavBar />
 
       {/* Hero Section */}
-      <div id="home" className="pt-28 relative flex flex-col items-center gap-3">
+      <div
+        id="home"
+        className="pt-[170px] relative flex flex-col items-center gap-3"
+      >
         <Main3DLaptop />
         <h1 className="text-5xl font-extrabold mb-2 mt-8 gradient-text">
           Jane Doe
