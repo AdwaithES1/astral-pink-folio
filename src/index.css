@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -38,6 +39,16 @@ body:before {
   letter-spacing: 0.03em;
 }
 
+.gradient-text-strong {
+  background: linear-gradient(92deg, #ff3796 12%, #ff90e8 48%, #1e3a8a 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+          background-clip: text;
+          color: transparent;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
 .nav-link {
   @apply flex items-center gap-1 px-3 py-2 rounded-md transition-colors duration-200;
   color: #fff;
@@ -57,21 +68,36 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom fast pop-in animation for professional effect */
-@keyframes pop-in-fast {
+/* Enhanced pop-in animation for professional effect */
+@keyframes fast-pop-in {
   0% {
     opacity: 0;
-    transform: scale(0.7);
+    transform: scale(0.88) translateY(30px);
+    filter: blur(5px);
   }
-  85% {
+  48% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.09) translateY(-7px);
+    filter: blur(0);
+  }
+  80% {
+    transform: scale(0.99) translateY(2px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
+    filter: blur(0);
   }
 }
-.animate-pop-in-fast {
-  animation: pop-in-fast 0.32s cubic-bezier(0.24,1.7,0.59,1.12) both;
+.animate-fast-pop-in {
+  opacity: 0;
+  /* stays hidden until .show-fast-pop-in class applied */
+  will-change: opacity, transform, filter;
+  transition: none;
 }
+.show-fast-pop-in {
+  animation: fast-pop-in 0.45s cubic-bezier(0.24,1.7,0.54,1.1) both;
+  opacity: 1 !important;
+  transition: none;
+}
+

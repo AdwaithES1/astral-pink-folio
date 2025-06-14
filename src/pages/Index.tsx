@@ -23,37 +23,36 @@ const Index = () => {
       >
         <Main3DLaptop />
         <h1
-          className={`text-5xl font-extrabold mb-2 mt-8 gradient-text 
-            ${animateHero ? "animate-pop-in-fast" : "opacity-0 scale-75"}
-            transition-all duration-300`}
+          className={`text-5xl font-extrabold mb-2 mt-8 gradient-text-strong animate-fast-pop-in ${
+            animateHero ? "show-fast-pop-in" : ""
+          }`}
           style={{ zIndex: 3 }}
         >
           Adwaith
         </h1>
         <h2
-          className={`text-xl text-zinc-300 max-w-2xl mx-auto text-center mb-4 font-sans
-            ${animateHero ? "animate-pop-in-fast" : "opacity-0 scale-75"}
-            transition-all duration-300`}
+          className={`text-xl text-zinc-300 max-w-2xl mx-auto text-center mb-4 font-sans animate-fast-pop-in ${
+            animateHero ? "show-fast-pop-in" : ""
+          }`}
         >
           An AI/ML geek who enjoys teaching machines to do my chores—one real-world solution at a time!
         </h2>
       </div>
-
-      <main className={`w-full max-w-5xl mx-auto ${animateHero ? "animate-pop-in-fast" : "opacity-0 scale-75"} transition-all duration-300`}>
+      <main className={`w-full max-w-5xl mx-auto`}>
         <Section id="about" title="About">
-          <div>
+          <div className={`animate-fast-pop-in ${animateHero ? "show-fast-pop-in" : ""}`}>
             <p>
               An AI/ML geek who enjoys teaching machines to do my chores—one real-world solution at a time!
             </p>
           </div>
         </Section>
         <Section id="works" title="Works">
-          <div>
+          <div className={`animate-fast-pop-in ${animateHero ? "show-fast-pop-in" : ""}`}>
             <p>Some featured projects coming soon!</p>
           </div>
         </Section>
         <Section id="resume" title="Resume">
-          <div>
+          <div className={`animate-fast-pop-in ${animateHero ? "show-fast-pop-in" : ""}`}>
             <a
               href="#"
               className="underline transition hover:text-electric-pink"
@@ -64,7 +63,7 @@ const Index = () => {
           </div>
         </Section>
         <Section id="contact" title="Contact">
-          <div>
+          <div className={`animate-fast-pop-in ${animateHero ? "show-fast-pop-in" : ""}`}>
             <p>
               Email: <a href="mailto:adwaith@example.com" className="text-electric-pink underline">adwaith@example.com</a>
             </p>
@@ -74,8 +73,6 @@ const Index = () => {
           </div>
         </Section>
       </main>
-
-      {/* Credits/footnote */}
       <footer className="w-full text-center mt-12 mb-5 text-xs text-zinc-500">
         &copy; {new Date().getFullYear()} Adwaith. Designed &amp; built with ❤️
       </footer>

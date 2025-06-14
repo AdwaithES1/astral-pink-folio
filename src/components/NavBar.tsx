@@ -54,7 +54,7 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
         height: collapsed ? NAV_COLLAPSED_HEIGHT : NAV_EXPANDED_HEIGHT,
       }}
     >
-      {/* Branding: stacked PORTFOLIO + ADWAITH, visible until collapsed */}
+      {/* Branding */}
       {!collapsed && (
         <div className="max-w-7xl mx-auto flex flex-col items-start justify-center px-8 pt-2 pb-1 h-full">
           <div
@@ -65,27 +65,26 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
               transition: "all 0.52s cubic-bezier(0.29,1.44,0.53,1.02)",
             }}
           >
-            <div className="font-bebas text-4xl sm:text-5xl tracking-wider text-white leading-none uppercase">
+            <div className="font-bebas text-2xl sm:text-3xl tracking-wider text-white leading-none uppercase mb-0.5">
               PORTFOLIO
             </div>
-            <div className="font-bebas text-3xl sm:text-4xl tracking-[0.15em] text-electric-pink mt-1 uppercase">
+            <div className="font-bebas text-5xl sm:text-6xl tracking-[0.18em] gradient-text-strong mt-0 uppercase">
               ADWAITH
             </div>
           </div>
         </div>
       )}
 
-      {/* Collapsed: only PORTFOLIO shown */}
       {collapsed && (
         <div className="flex items-center justify-between px-8 py-2 max-w-7xl mx-auto h-[70px]">
           <span
             className={cn(
-              "text-2xl font-bebas gradient-text tracking-[0.09em] select-none uppercase transition-transform duration-[400ms] ",
+              "text-3xl sm:text-4xl font-bebas gradient-text-strong tracking-[0.11em] select-none uppercase transition-transform duration-[400ms] ",
               "scale-100 opacity-100"
             )}
             style={{ transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)" }}
           >
-            PORTFOLIO
+            ADWAITH
           </span>
         </div>
       )}
@@ -122,32 +121,17 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
           </li>
         ))}
       </ul>
-      {/* Animation keyframes (all in one place!) */}
+      {/* Animation keyframes */}
       <style>{`
-        @keyframes pop-in-fast {
-          0% {
-            opacity: 0;
-            transform: scale(0.7);
-          }
-          85% {
-            opacity: 1;
-            transform: scale(1.1);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1);
-          }
+        .gradient-text-strong {
+          background: linear-gradient(92deg, #ff3796 12%, #ff90e8 48%, #1e3a8a 80%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+                  background-clip: text;
+                  color: transparent;
+          font-weight: 900;
+          letter-spacing: 0.03em;
         }
-        .animate-pop-in-fast {
-          animation: pop-in-fast 0.32s cubic-bezier(0.24,1.7,0.59,1.12) both;
-        }
-        @keyframes burst {
-          0% { opacity:1; transform: scale(3.2) translateY(-40px);}
-          88% { opacity:1; }
-          100% { opacity:0; transform: scale(7.4) translateY(-140px);}
-        }
-        .animate-burst { animation: burst 530ms cubic-bezier(.21,1.59,.42,1.01) 1; }
-        .animate-burst-fast { animation: burst 430ms cubic-bezier(.21,1.6,.4,1.02) 1; }
       `}</style>
     </nav>
   );
