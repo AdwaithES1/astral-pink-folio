@@ -1,3 +1,4 @@
+
 import { Home, FileText, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -53,28 +54,28 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
         height: collapsed ? NAV_COLLAPSED_HEIGHT : NAV_EXPANDED_HEIGHT,
       }}
     >
-      {/* Branding: never hidden until collapsed */}
+      {/* Branding: stacked PORTFOLIO + ADWAITH, visible until collapsed */}
       {!collapsed && (
         <div className="max-w-7xl mx-auto flex flex-col items-start justify-center px-8 pt-2 pb-1 h-full">
           <div
             className={cn(
-              "font-bebas text-4xl sm:text-5xl tracking-wider text-white leading-none select-none uppercase",
-              "transition-transform duration-[520ms]",
-              // DO NOT apply burstAnim since we now want to keep the branding smoothly present
-              "scale-100 opacity-100"
+              "transition-transform duration-[520ms] scale-100 opacity-100 select-none",
             )}
             style={{
-              letterSpacing: "0.14em",
-              lineHeight: "1.08",
               transition: "all 0.52s cubic-bezier(0.29,1.44,0.53,1.02)",
             }}
           >
-            Portfolio
+            <div className="font-bebas text-4xl sm:text-5xl tracking-wider text-white leading-none uppercase">
+              PORTFOLIO
+            </div>
+            <div className="font-bebas text-3xl sm:text-4xl tracking-[0.15em] text-electric-pink mt-1 uppercase">
+              ADWAITH
+            </div>
           </div>
         </div>
       )}
 
-      {/* Collapsed: Portfolio stays in navbar */}
+      {/* Collapsed: only PORTFOLIO shown */}
       {collapsed && (
         <div className="flex items-center justify-between px-8 py-2 max-w-7xl mx-auto h-[70px]">
           <span
@@ -84,7 +85,7 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
             )}
             style={{ transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)" }}
           >
-            Portfolio
+            PORTFOLIO
           </span>
         </div>
       )}
@@ -123,6 +124,23 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
       </ul>
       {/* Animation keyframes (all in one place!) */}
       <style>{`
+        @keyframes pop-in-fast {
+          0% {
+            opacity: 0;
+            transform: scale(0.7);
+          }
+          85% {
+            opacity: 1;
+            transform: scale(1.1);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        .animate-pop-in-fast {
+          animation: pop-in-fast 0.32s cubic-bezier(0.24,1.7,0.59,1.12) both;
+        }
         @keyframes burst {
           0% { opacity:1; transform: scale(3.2) translateY(-40px);}
           88% { opacity:1; }

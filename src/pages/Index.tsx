@@ -1,20 +1,19 @@
+
 import NavBar from "@/components/NavBar";
 import Main3DLaptop from "@/components/3DLaptop";
 import Section from "@/components/Section";
-import WelcomeModal from "@/components/WelcomeModal";
-import WelcomeOverlay from "@/components/WelcomeOverlay";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Index = () => {
-  const [introShown, setIntroShown] = useState(false);
+  // Used to trigger pop-in animations on mount
+  const [animateHero, setAnimateHero] = useState(false);
 
-  const handleIntroFinish = () => {
-    setIntroShown(true);
-  };
+  useEffect(() => {
+    setTimeout(() => setAnimateHero(true), 20); // trigger after mount
+  }, []);
 
   return (
     <div className="relative min-h-screen w-full bg-deep-black overflow-x-hidden">
-      {!introShown && <WelcomeOverlay onFinish={handleIntroFinish} />}
       {/* Navbar always shown */}
       <NavBar burstAnim={false} />
       {/* Hero Section */}
@@ -24,23 +23,23 @@ const Index = () => {
       >
         <Main3DLaptop />
         <h1
-          className={`text-5xl font-extrabold mb-2 mt-8 gradient-text transition-all duration-[570ms] ease-[cubic-bezier(0.25,1.7,0.49,1.0)] scale-100 opacity-100`}
-          style={{
-            transition: "all 0.57s cubic-bezier(0.25,1.7,0.49,1.0)",
-            zIndex: 3,
-          }}
+          className={`text-5xl font-extrabold mb-2 mt-8 gradient-text 
+            ${animateHero ? "animate-pop-in-fast" : "opacity-0 scale-75"}
+            transition-all duration-300`}
+          style={{ zIndex: 3 }}
         >
           Adwaith
         </h1>
         <h2
           className={`text-xl text-zinc-300 max-w-2xl mx-auto text-center mb-4 font-sans
-            transition-all duration-[430ms] ease-[cubic-bezier(0.29,1.46,0.6,0.97)]`}
+            ${animateHero ? "animate-pop-in-fast" : "opacity-0 scale-75"}
+            transition-all duration-300`}
         >
           An AI/ML geek who enjoys teaching machines to do my chores—one real-world solution at a time!
         </h2>
       </div>
 
-      <main className="w-full max-w-5xl mx-auto">
+      <main className={`w-full max-w-5xl mx-auto ${animateHero ? "animate-pop-in-fast" : "opacity-0 scale-75"} transition-all duration-300`}>
         <Section id="about" title="About">
           <div>
             <p>
