@@ -1,4 +1,3 @@
-
 import { Home, FileText, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -54,42 +53,38 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
         height: collapsed ? NAV_COLLAPSED_HEIGHT : NAV_EXPANDED_HEIGHT,
       }}
     >
-      {/* Branding */}
+      {/* Branding: never hidden until collapsed */}
       {!collapsed && (
         <div className="max-w-7xl mx-auto flex flex-col items-start justify-center px-8 pt-2 pb-1 h-full">
           <div
             className={cn(
               "font-bebas text-4xl sm:text-5xl tracking-wider text-white leading-none select-none uppercase",
               "transition-transform duration-[520ms]",
-              burstAnim
-                ? "origin-center scale-[2.6] -translate-y-14 opacity-0 animate-burst-fast"
-                : "scale-100 opacity-100"
+              // DO NOT apply burstAnim since we now want to keep the branding smoothly present
+              "scale-100 opacity-100"
             )}
             style={{
               letterSpacing: "0.14em",
               lineHeight: "1.08",
-              transition:
-                "all 0.52s cubic-bezier(0.29,1.44,0.53,1.02)",
+              transition: "all 0.52s cubic-bezier(0.29,1.44,0.53,1.02)",
             }}
           >
-            ADWAITH
+            Portfolio
           </div>
         </div>
       )}
 
-      {/* Collapsed: only ADWAITH, animated */}
+      {/* Collapsed: Portfolio stays in navbar */}
       {collapsed && (
         <div className="flex items-center justify-between px-8 py-2 max-w-7xl mx-auto h-[70px]">
           <span
             className={cn(
               "text-2xl font-bebas gradient-text tracking-[0.09em] select-none uppercase transition-transform duration-[400ms] ",
-              burstAnim
-                ? "origin-center scale-[2.1] -translate-y-10 opacity-0 animate-burst-fast"
-                : "scale-100 opacity-100"
+              "scale-100 opacity-100"
             )}
             style={{ transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)" }}
           >
-            ADWAITH
+            Portfolio
           </span>
         </div>
       )}

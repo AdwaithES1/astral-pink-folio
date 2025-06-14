@@ -3,36 +3,28 @@ import Main3DLaptop from "@/components/3DLaptop";
 import Section from "@/components/Section";
 import WelcomeModal from "@/components/WelcomeModal";
 import WelcomeOverlay from "@/components/WelcomeOverlay";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const Index = () => {
   const [introShown, setIntroShown] = useState(false);
-  // To force content 'burst' out once intro completes
-  const [burstAnim, setBurstAnim] = useState(false);
 
   const handleIntroFinish = () => {
     setIntroShown(true);
-    setBurstAnim(true);
-    setTimeout(() => setBurstAnim(false), 650); // Remove the burst fx after animation
   };
 
   return (
     <div className="relative min-h-screen w-full bg-deep-black overflow-x-hidden">
       {!introShown && <WelcomeOverlay onFinish={handleIntroFinish} />}
-      {/* Navbar always shown, receives 'burst' prop */}
-      <NavBar burstAnim={burstAnim} />
+      {/* Navbar always shown */}
+      <NavBar burstAnim={false} />
       {/* Hero Section */}
       <div
         id="home"
-        className={`pt-[170px] relative flex flex-col items-center gap-3 z-[1] ${
-          burstAnim ? "pointer-events-none" : ""
-        }`}
+        className={`pt-[170px] relative flex flex-col items-center gap-3 z-[1]`}
       >
         <Main3DLaptop />
         <h1
-          className={`text-5xl font-extrabold mb-2 mt-8 gradient-text transition-all duration-[570ms] ease-[cubic-bezier(0.25,1.7,0.49,1.0)] 
-          ${burstAnim ? "origin-center scale-[3.4] -translate-y-24 opacity-0 animate-burst shrink-0" : "scale-100 opacity-100"}
-          `}
+          className={`text-5xl font-extrabold mb-2 mt-8 gradient-text transition-all duration-[570ms] ease-[cubic-bezier(0.25,1.7,0.49,1.0)] scale-100 opacity-100`}
           style={{
             transition: "all 0.57s cubic-bezier(0.25,1.7,0.49,1.0)",
             zIndex: 3,
@@ -42,8 +34,7 @@ const Index = () => {
         </h1>
         <h2
           className={`text-xl text-zinc-300 max-w-2xl mx-auto text-center mb-4 font-sans
-            transition-all duration-[430ms] ease-[cubic-bezier(0.29,1.46,0.6,0.97)] ${burstAnim ? "origin-center scale-150 translate-y-12 opacity-0" : ""}
-          `}
+            transition-all duration-[430ms] ease-[cubic-bezier(0.29,1.46,0.6,0.97)]`}
         >
           An AI/ML geek who enjoys teaching machines to do my chores—one real-world solution at a time!
         </h2>
@@ -53,11 +44,7 @@ const Index = () => {
         <Section id="about" title="About">
           <div>
             <p>
-              Hello! I'm Adwaith, a passionate developer crafting immersive web
-              experiences with React, Three.js, and modern UI/UX. 
-            </p>
-            <p>
-              I blend bold, futuristic visuals with professional-grade technical skill.
+              An AI/ML geek who enjoys teaching machines to do my chores—one real-world solution at a time!
             </p>
           </div>
         </Section>
