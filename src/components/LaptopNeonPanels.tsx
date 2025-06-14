@@ -1,56 +1,29 @@
 
-import React, { forwardRef } from "react";
+import React, { forwardRef, useRef, useImperativeHandle } from "react";
+import * as THREE from "three";
+import NeonLines from "./LaptopNeonPanels/NeonLines";
+import Hologram from "./LaptopNeonPanels/Hologram";
+import FlickerMiniHolo from "./LaptopNeonPanels/FlickerMiniHolo";
 
-export const LaptopNeonPanels = forwardRef<THREE.Mesh[], {}>(function LaptopNeonPanels(props, ref) {
-  // We'll forward refs as an array of mesh refs for neonLines (index 0) and powerHolo (index 1).
-  // This makes ref assignment from parent (FuturisticLaptop) easy.
-  return (
-    <group>
-      {/* Neon lines (move opacity for shimmer) */}
-      <mesh ref={Array.isArray(ref) ? ref[0] : undefined} position={[0, 0.56, -0.38]}>
-        <planeGeometry args={[0.95, 0.045]} />
-        <meshBasicMaterial
-          color="#ff3796"
-          opacity={0.32}
-          transparent
-        />
-      </mesh>
-      {/* Hologram popup (animated upward shimmer) */}
-      <mesh
-        ref={Array.isArray(ref) ? ref[1] : undefined}
-        position={[0.31, 0.77, -0.54]}
-        rotation={[-0.41, 0, -0.18]}
-      >
-        <planeGeometry args={[0.33, 0.45]} />
-        <meshStandardMaterial
-          color="#fff"
-          roughness={0.28}
-          metalness={0.0}
-          transparent
-          opacity={0.21}
-          emissive="#ff3796"
-          emissiveIntensity={0.16}
-        />
-      </mesh>
-      {/* Flickering mini-holos */}
-      {[[-0.9, 0.91, -0.46], [0.9, 0.92, -0.44]].map(([x, y, z], idx) => (
-        <mesh
-          key={idx}
-          position={[x, y, z]}
-          rotation={[-0.27, 0, 0.6 - 1.2 * idx]}
-        >
-          <boxGeometry args={[0.15, 0.04, 0.09]} />
-          <meshStandardMaterial
-            color="#1e3a8a"
-            roughness={0.39}
-            metalness={0.92}
-            transparent
-            opacity={0.22}
-            emissive="#fff"
-            emissiveIntensity={0.28}
-          />
-        </mesh>
-      ))}
-    </group>
-  );
-});
+/**
+ * Ref forwarding: exposes [neonLinesRef, hologramRef] as array to parent.
+ */
+export const LaptopNeonPanels = forwardRef<[THREE.Mesh, THREE.Mesh], {}>(
+  function LaptopNeonPanels(props, ref) {
+    const neonLinesRef = useRef<THREE.Mesh>(null!);
+    const hologramRef = useRef<THREE.Mesh>(null!);
+
+    useImperativeHandle(ref, () => [neonLinesRef.current, hologramRef.current]);
+
+    return (
+      <group>
+        <NeonLines ref={neonLinesRef} />
+        <Hologram ref={hologramRef} />
+        <FlickerMiniHolo x={-0.9} y={0.91} z={-0.46} rot={0.6} />
+        <FlickerMiniHolo x={0.9} y={0.92} z={-0.44} rot={-0.6} />
+      </group>
+    );
+  }
+);
+
+export default LaptopNeonPanels;
