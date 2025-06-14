@@ -11,7 +11,11 @@ const sections = [
   { id: "contact", label: "Contact", icon: Mail },
 ];
 
-const NavBar = () => {
+type NavBarProps = {
+  burstAnim?: boolean;
+};
+
+const NavBar = ({ burstAnim = false }: NavBarProps) => {
   const [active, setActive] = useState("home");
   const [collapsed, setCollapsed] = useState(false);
   const navBarRef = useRef<HTMLDivElement>(null);
@@ -32,7 +36,6 @@ const NavBar = () => {
     }
   };
 
-  // Nav height (expanded/collapsed) for positioning icon row
   const NAV_EXPANDED_HEIGHT = 170;
   const NAV_COLLAPSED_HEIGHT = 70;
 
@@ -51,34 +54,47 @@ const NavBar = () => {
         height: collapsed ? NAV_COLLAPSED_HEIGHT : NAV_EXPANDED_HEIGHT,
       }}
     >
-      {/* Expanded section: Branding */}
+      {/* Branding */}
       {!collapsed && (
         <div className="max-w-7xl mx-auto flex flex-col items-start justify-center px-8 pt-2 pb-1 h-full">
           <div
-            className="text-portfolio-gradient-from font-bebas text-[1.3rem] tracking-[0.11em] select-none leading-none"
-            style={{ letterSpacing: "0.11em", marginBottom: "0.2rem"}}
-          >
-            PORTFOLIO PAGE
-          </div>
-          <div
-            className="font-bebas text-4xl sm:text-5xl tracking-wider text-white leading-none select-none uppercase mt-1"
-            style={{ letterSpacing: "0.15em", lineHeight: "1.08" }}
+            className={cn(
+              "font-bebas text-4xl sm:text-5xl tracking-wider text-white leading-none select-none uppercase",
+              "transition-transform duration-[520ms]",
+              burstAnim
+                ? "origin-center scale-[2.6] -translate-y-14 opacity-0 animate-burst-fast"
+                : "scale-100 opacity-100"
+            )}
+            style={{
+              letterSpacing: "0.14em",
+              lineHeight: "1.08",
+              transition:
+                "all 0.52s cubic-bezier(0.29,1.44,0.53,1.02)",
+            }}
           >
             ADWAITH
           </div>
         </div>
       )}
 
-      {/* Collapsed section: only when collapsed */}
+      {/* Collapsed: only ADWAITH, animated */}
       {collapsed && (
         <div className="flex items-center justify-between px-8 py-2 max-w-7xl mx-auto h-[70px]">
-          <span className="text-2xl font-bebas gradient-text tracking-[0.09em] select-none uppercase">
+          <span
+            className={cn(
+              "text-2xl font-bebas gradient-text tracking-[0.09em] select-none uppercase transition-transform duration-[400ms] ",
+              burstAnim
+                ? "origin-center scale-[2.1] -translate-y-10 opacity-0 animate-burst-fast"
+                : "scale-100 opacity-100"
+            )}
+            style={{ transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)" }}
+          >
             ADWAITH
           </span>
         </div>
       )}
 
-      {/* Nav menu: always inside nav bar, bottom edge */}
+      {/* Nav menu: always */}
       <ul
         className={cn(
           "absolute flex gap-2 transition-all duration-300",
@@ -87,7 +103,6 @@ const NavBar = () => {
             : "right-8 bottom-4 bg-black/40 rounded-xl px-4 py-2 border border-zinc-700"
         )}
         style={{
-          // Ensure it's always pinned to the bottom edge of nav bar, not screen
           position: "absolute",
           zIndex: 30,
         }}
@@ -101,7 +116,7 @@ const NavBar = () => {
               )}
               onClick={() => onNav(id)}
               aria-label={label}
-              style={{ fontFamily: "Inter,sans-serif" }} // fallback to Inter for icons
+              style={{ fontFamily: "Inter,sans-serif" }}
             >
               <Icon size={collapsed ? 22 : 24} className="inline -mt-1 mr-1 text-portfolio-gradient-from" />
               <span className={active === id ? "gradient-text" : ""}>
@@ -111,6 +126,16 @@ const NavBar = () => {
           </li>
         ))}
       </ul>
+      {/* Animation keyframes (all in one place!) */}
+      <style>{`
+        @keyframes burst {
+          0% { opacity:1; transform: scale(3.2) translateY(-40px);}
+          88% { opacity:1; }
+          100% { opacity:0; transform: scale(7.4) translateY(-140px);}
+        }
+        .animate-burst { animation: burst 530ms cubic-bezier(.21,1.59,.42,1.01) 1; }
+        .animate-burst-fast { animation: burst 430ms cubic-bezier(.21,1.6,.4,1.02) 1; }
+      `}</style>
     </nav>
   );
 };
