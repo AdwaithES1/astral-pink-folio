@@ -1,14 +1,12 @@
-// MODERN PORTFOLIO: DESKTOP-FIRST
-
 import NavBar from "@/components/NavBar";
 import Main3DLaptop from "@/components/3DLaptop";
 import Section from "@/components/Section";
+import WelcomeModal from "@/components/WelcomeModal";
 
 const Index = () => {
   return (
     <div className="relative min-h-screen w-full bg-deep-black overflow-x-hidden">
-      <NavBar />
-
+      <WelcomeModal />
       {/* Hero Section */}
       <div
         id="home"
