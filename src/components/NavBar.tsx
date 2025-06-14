@@ -1,4 +1,3 @@
-
 import { Home, FileText, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -66,13 +65,12 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
             }}
           >
             <div
-              className="navbar-brand-adwaith text-2xl sm:text-3xl gradient-text-strong uppercase leading-none mb-0.5"
+              className="navbar-brand-adwaith text-2xl sm:text-3xl gradient-text-strong uppercase leading-none mb-0.5 font-caveat"
             >
               PORTFOLIO
             </div>
             <div
-              // Apply Pacifico font and bold
-              className="navbar-brand-adwaith font-pacifico font-bold tracking-tight text-5xl sm:text-6xl text-white mt-0 uppercase leading-none"
+              className="navbar-brand-adwaith font-caveat font-bold tracking-tight text-5xl sm:text-6xl text-white mt-0 uppercase leading-none"
             >
               ADWAITH
             </div>
@@ -84,8 +82,7 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
         <div className="flex items-center justify-between px-8 py-2 max-w-7xl mx-auto h-[70px]">
           <span
             className={cn(
-              // Apply Pacifico font and bold
-              "navbar-brand-adwaith font-pacifico font-bold tracking-tight text-3xl sm:text-4xl text-white select-none uppercase transition-transform duration-[400ms] scale-100 opacity-100"
+              "navbar-brand-adwaith font-caveat font-bold tracking-tight text-3xl sm:text-4xl text-white select-none uppercase transition-transform duration-[400ms] scale-100 opacity-100"
             )}
             style={{
               transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)",
@@ -113,12 +110,12 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
           <li key={id}>
             <button
               className={cn(
-                "nav-link group hover-scale transition relative font-semibold text-base",
+                "nav-link group hover-scale transition relative font-semibold text-base font-caveat",
                 active === id && "active"
               )}
               onClick={() => onNav(id)}
               aria-label={label}
-              style={{ fontFamily: "Inter,sans-serif" }}
+              style={{ fontFamily: "Caveat, cursive" }}
             >
               <Icon size={collapsed ? 22 : 24} className="inline -mt-1 mr-1 text-portfolio-gradient-from" />
               <span className={active === id ? "gradient-text" : ""}>
@@ -145,4 +142,3 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
 };
 
 export default NavBar;
-
