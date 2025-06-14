@@ -1,8 +1,10 @@
+
 import NavBar from "@/components/NavBar";
 import Main3DLaptop from "@/components/3DLaptop";
 import Section from "@/components/Section";
 import { useEffect, useState } from "react";
 import PopInOnView from "@/components/PopInOnView";
+import { Gmail, Instagram, Linkedin, Whatsapp } from "lucide-react";
 
 const Index = () => {
   // Used to trigger pop-in animations on mount
@@ -57,12 +59,20 @@ const Index = () => {
         </Section>
         <Section id="contact" title="Contact">
           <PopInOnView thresholdClass="animate-soft-pop-in">
-            <p>
-              Email: <a href="mailto:adwaith@example.com" className="text-electric-pink underline">adwaith@example.com</a>
-            </p>
-            <p>
-              LinkedIn: <a href="#" className="text-lite-pink underline">/in/adwaith</a>
-            </p>
+            <div className="flex flex-row gap-6 justify-center items-center mt-4">
+              <a href="mailto:adwaith@example.com" aria-label="Gmail" target="_blank" rel="noopener">
+                <Gmail size={36} className="text-electric-pink hover:scale-110 transition" />
+              </a>
+              <a href="https://instagram.com/exampleprofile" aria-label="Instagram" target="_blank" rel="noopener">
+                <Instagram size={36} className="text-lite-pink hover:scale-110 transition" />
+              </a>
+              <a href="https://linkedin.com/in/adwaith" aria-label="LinkedIn" target="_blank" rel="noopener">
+                <Linkedin size={36} className="text-navy-blue hover:scale-110 transition" />
+              </a>
+              <a href="https://wa.me/1234567890" aria-label="WhatsApp" target="_blank" rel="noopener">
+                <Whatsapp size={36} className="text-green-500 hover:scale-110 transition" />
+              </a>
+            </div>
           </PopInOnView>
         </Section>
       </main>

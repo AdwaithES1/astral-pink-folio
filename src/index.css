@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
 
 @tailwind base;
@@ -66,7 +65,10 @@ body:before {
 }
 
 /* Smooth scrolling */
-html {
+html,
+body {
+  font-family: 'Caveat', cursive !important;
+  /* ensure Caveat takes precedence */
   scroll-behavior: smooth;
 }
 

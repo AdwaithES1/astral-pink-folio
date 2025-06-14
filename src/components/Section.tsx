@@ -1,3 +1,4 @@
+
 import { ReactNode, forwardRef } from "react";
 import PopInOnView from "./PopInOnView";
 
@@ -9,12 +10,12 @@ type SectionProps = {
 
 const Section = forwardRef<HTMLDivElement, SectionProps>(
   ({ id, title, children }, ref) => (
-    <section id={id} ref={ref} className="section-card">
+    <section id={id} ref={ref} className="section-card flex flex-col items-center text-center">
       {/* Section titles: still dramatic */}
       <PopInOnView as="h2" className="bebas-gradient-heading text-4xl sm:text-5xl font-bold mb-4" thresholdClass="animate-fast-pop-in">
         {title}
       </PopInOnView>
-      <div className="text-zinc-100">
+      <div className="text-zinc-100 w-full flex flex-col items-center">
         {/* Children decide their pop in: usually soft unless overridden */}
         {children}
       </div>

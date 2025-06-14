@@ -65,12 +65,14 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
             }}
           >
             <div
-              className="navbar-brand-adwaith text-2xl sm:text-3xl gradient-text-strong uppercase leading-none mb-0.5 font-caveat"
+              className="navbar-brand-adwaith text-2xl sm:text-3xl gradient-text-strong uppercase leading-none mb-0.5 font-caveat font-bold"
+              style={{ fontFamily: "'Caveat', cursive", fontWeight: 700 }}
             >
               PORTFOLIO
             </div>
             <div
               className="navbar-brand-adwaith font-caveat font-bold tracking-tight text-5xl sm:text-6xl text-white mt-0 uppercase leading-none"
+              style={{ fontFamily: "'Caveat', cursive", fontWeight: 700 }}
             >
               ADWAITH
             </div>
@@ -81,12 +83,8 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
       {collapsed && (
         <div className="flex items-center justify-between px-8 py-2 max-w-7xl mx-auto h-[70px]">
           <span
-            className={cn(
-              "navbar-brand-adwaith font-caveat font-bold tracking-tight text-3xl sm:text-4xl text-white select-none uppercase transition-transform duration-[400ms] scale-100 opacity-100"
-            )}
-            style={{
-              transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)",
-            }}
+            className="navbar-brand-adwaith font-caveat font-bold tracking-tight text-3xl sm:text-4xl text-white select-none uppercase transition-transform duration-[400ms] scale-100 opacity-100"
+            style={{ fontFamily: "'Caveat', cursive", fontWeight: 700, transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)" }}
           >
             ADWAITH
           </span>
@@ -115,7 +113,7 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
               )}
               onClick={() => onNav(id)}
               aria-label={label}
-              style={{ fontFamily: "Caveat, cursive" }}
+              style={{ fontFamily: "'Caveat', cursive", fontWeight: 700 }}
             >
               <Icon size={collapsed ? 22 : 24} className="inline -mt-1 mr-1 text-portfolio-gradient-from" />
               <span className={active === id ? "gradient-text" : ""}>
