@@ -1,3 +1,4 @@
+
 import NavBar from "@/components/NavBar";
 import Main3DLaptop from "@/components/3DLaptop";
 import Section from "@/components/Section";
@@ -38,7 +39,7 @@ const Index = () => {
             zIndex: 3,
           }}
         >
-          Jane Doe
+          Adwaith
         </h1>
         <h2
           className={`text-xl text-zinc-300 max-w-2xl mx-auto text-center mb-4 font-sans
@@ -53,7 +54,7 @@ const Index = () => {
         <Section id="about" title="About">
           <div>
             <p>
-              Hello! I'm Jane Doe, a passionate developer crafting immersive web
+              Hello! I'm Adwaith, a passionate developer crafting immersive web
               experiences with React, Three.js, and modern UI/UX. 
             </p>
             <p>
@@ -80,10 +81,10 @@ const Index = () => {
         <Section id="contact" title="Contact">
           <div>
             <p>
-              Email: <a href="mailto:jane@example.com" className="text-electric-pink underline">jane@example.com</a>
+              Email: <a href="mailto:adwaith@example.com" className="text-electric-pink underline">adwaith@example.com</a>
             </p>
             <p>
-              LinkedIn: <a href="#" className="text-lite-pink underline">/in/janedoe</a>
+              LinkedIn: <a href="#" className="text-lite-pink underline">/in/adwaith</a>
             </p>
           </div>
         </Section>
@@ -91,10 +92,11 @@ const Index = () => {
 
       {/* Credits/footnote */}
       <footer className="w-full text-center mt-12 mb-5 text-xs text-zinc-500">
-        &copy; {new Date().getFullYear()} Jane Doe. Designed &amp; built with ❤️
+        &copy; {new Date().getFullYear()} Adwaith. Designed &amp; built with ❤️
       </footer>
     </div>
   );
 };
 
 export default Index;
+
