@@ -1,4 +1,3 @@
-
 import NavBar from "@/components/NavBar";
 import Main3DLaptop from "@/components/3DLaptop";
 import Section from "@/components/Section";
@@ -91,7 +90,7 @@ const Index = () => {
                   </div>
                 ))}
               </div>
-              {/* Github link bottom right, with "more at" label */}
+              {/* Github link bottom right, with "more at" label (desktop only!) */}
               <div className="absolute right-0 flex flex-row items-center gap-2" style={{ bottom: -60 }}>
                 <span
                   className="font-caveat text-2xl sm:text-2xl text-white opacity-80 mr-2 select-none"
@@ -114,7 +113,7 @@ const Index = () => {
                 </a>
               </div>
             </div>
-            {/* On mobile, show Github link as a block below */}
+            {/* On mobile, show Github link as a block below, with ONLY ONE "more at" */}
             <div className="flex sm:hidden justify-end mt-5 w-full">
               <span
                 className="font-caveat text-lg text-white opacity-85 mr-1 select-none"
@@ -201,4 +200,3 @@ const Index = () => {
 };
 
 export default Index;
-
