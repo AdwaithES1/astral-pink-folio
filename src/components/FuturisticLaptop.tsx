@@ -1,6 +1,6 @@
 
 // --- 2200 sci-fi layered laptop --- //
-import { useFrame } from "@react-three/fiber";
+import { useFrame, MeshStandardMaterialProps, MeshBasicMaterialProps } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
@@ -32,7 +32,7 @@ function FuturisticLaptop() {
       {/* FLOATING PARALLAX SHADOW */}
       <mesh position={[0, -0.52, -0.28]} rotation={[-0.41, 0, 0]} scale={[2.6, 0.7, 1]}>
         <circleGeometry args={[1, 54]} />
-        <meshBasicMaterial color="#0e0a2f" transparent opacity={0.39} />
+        <meshBasicMaterial color="#0e0a2f" transparent={true} opacity={0.39} />
       </mesh>
 
       {/* BASE - Metallic chassis, chunky */}
@@ -43,7 +43,7 @@ function FuturisticLaptop() {
       {/* Glowing edge wrap */}
       <mesh position={[0, -0.293, 0]} castShadow>
         <boxGeometry args={[2.77, 0.02, 1.41]} />
-        <meshStandardMaterial color="#1e3a8a" emissive="#1e3a8a" metalness={0.7} roughness={0.07} emissiveIntensity={0.4} transparent opacity={0.22} />
+        <meshStandardMaterial color="#1e3a8a" emissive="#1e3a8a" metalness={0.7} roughness={0.07} emissiveIntensity={0.4} transparent={true} opacity={0.22} />
       </mesh>
 
       {/* KEYBOARD - glowing underlay */}
@@ -63,7 +63,7 @@ function FuturisticLaptop() {
             ]}
           >
             <boxGeometry args={[0.085, 0.018, 0.07]} />
-            <meshStandardMaterial color="#19143f" metalness={0.7} roughness={0.24} emissive={col % 2 === 0 ? "#ff3796" : "#fff"} emissiveIntensity={row === 2 ? 0.079 : 0.059} transparent opacity={0.81} />
+            <meshStandardMaterial color="#19143f" metalness={0.7} roughness={0.24} emissive={col % 2 === 0 ? "#ff3796" : "#fff"} emissiveIntensity={row === 2 ? 0.079 : 0.059} transparent={true} opacity={0.81} />
           </mesh>
         ))
       )}
@@ -73,9 +73,9 @@ function FuturisticLaptop() {
         <boxGeometry args={[1.77, 0.015, 0.49]} />
         <meshBasicMaterial
           color="#ff90e8"
-          wireframe
+          wireframe={true}
           opacity={0.22}
-          transparent
+          transparent={true}
         />
       </mesh>
 
@@ -108,7 +108,7 @@ function FuturisticLaptop() {
           color="#ff3796"
           metalness={0.81}
           roughness={0.06}
-          transparent
+          transparent={true}
           opacity={0.082}
           emissive="#ff3796"
           emissiveIntensity={0.26}
@@ -119,7 +119,7 @@ function FuturisticLaptop() {
         <planeGeometry args={[2.01, 1.18]} />
         <meshStandardMaterial
           color="#fff"
-          transparent
+          transparent={true}
           opacity={0.09}
           metalness={1}
           roughness={0}
@@ -155,7 +155,7 @@ function FuturisticLaptop() {
         <sphereGeometry args={[0.34, 30, 30]} />
         <meshBasicMaterial
           color="#ff3796"
-          transparent
+          transparent={true}
           opacity={0.13}
         />
       </mesh>
@@ -170,7 +170,7 @@ function FuturisticLaptop() {
             emissive="#1e3a8a"
             emissiveIntensity={0.12 + 0.12 * idx}
             opacity={0.21 + 0.10 * idx}
-            transparent
+            transparent={true}
           />
         </mesh>
       ))}
@@ -182,7 +182,7 @@ function FuturisticLaptop() {
         <meshBasicMaterial
           color="#ff3796"
           opacity={0.32}
-          transparent
+          transparent={true}
         />
       </mesh>
       {/* Hologram popup (animated upward shimmer) */}
@@ -196,7 +196,7 @@ function FuturisticLaptop() {
           color="#fff"
           roughness={0.28}
           metalness={0.0}
-          transparent
+          transparent={true}
           opacity={0.21}
           emissive="#ff3796"
           emissiveIntensity={0.16}
@@ -214,7 +214,7 @@ function FuturisticLaptop() {
             color="#1e3a8a"
             roughness={0.39}
             metalness={0.92}
-            transparent
+            transparent={true}
             opacity={0.22}
             emissive="#fff"
             emissiveIntensity={0.28}
@@ -241,3 +241,4 @@ function FuturisticLaptop() {
 }
 
 export default FuturisticLaptop;
+
