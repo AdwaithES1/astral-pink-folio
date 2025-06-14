@@ -281,52 +281,61 @@ html {
   display: inline-block;
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 900;
-  letter-spacing: 0.03em; /* Reduced for headings */
-  color: #fff; /* Always solid white */
-  background: none !important;
-  -webkit-background-clip: unset !important;
-  -webkit-text-fill-color: unset !important;
+  letter-spacing: 0.03em;
+  /* Solid white gradient as base text color */
+  background: linear-gradient(90deg, #fff 0%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+          background-clip: text;
+          color: transparent;
   z-index: 1;
   overflow: visible;
-  /* No gradient by default -- replaced by animated overlay */
 }
 
-/* Animated gradient shine overlay */
+/* Animated moving shine overlay using gradient, clipped to text */
 .bebas-gradient-heading::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 2;
   pointer-events: none;
+  /* The animated pink-to-blue gradient (semi-transparent) */
   background: linear-gradient(
     100deg,
     transparent 0%,
     #ff3796 18%,
-    #ff90e8 38%,
+    #ff90e8 36%,
     #1e3a8a 70%,
     transparent 95%
   );
-  background-size: 450px 100%;
+  background-size: 350px 100%;
   background-repeat: no-repeat;
+  /* Blend over white base */
   mix-blend-mode: lighten;
-  opacity: 0.77;
-  /* Animate left to right every 5s */
-  animation: heading-horizontal-shine 5s linear infinite;
+  opacity: 0.75;
+  /* Animate from left to right every 5s */
+  animation: heading-gradient-shine-move 5s linear infinite;
+
+  /* Very important: clip the animation inside the text */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
-@keyframes heading-horizontal-shine {
+@keyframes heading-gradient-shine-move {
   0% {
-    background-position: -400px 0;
+    background-position: -350px 0;
     opacity: 0.65;
   }
-  15% { opacity: 0.88; }
+  8% { opacity: 1; }
   50% {
-    background-position: 400px 0;
+    background-position: 350px 0;
     opacity: 1;
   }
-  70% { opacity: 0.77; }
+  84% { opacity: 0.8; }
   100% {
-    background-position: 400px 0;
+    background-position: 350px 0;
     opacity: 0.65;
   }
 }
