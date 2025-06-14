@@ -3,15 +3,14 @@ import React, { useRef, useImperativeHandle, forwardRef } from "react";
 import NeonLines from "./NeonLines";
 import Hologram from "./Hologram";
 import FlickerMiniHolo from "./FlickerMiniHolo";
-import * as THREE from "three";
 
 /**
  * Ref forwarding: exposes [neonLinesRef, hologramRef] as array to parent.
  */
-export const LaptopNeonPanels = forwardRef<[THREE.Mesh, THREE.Mesh], {}>(
+export const LaptopNeonPanels = forwardRef<[any, any], {}>(
   function LaptopNeonPanels(props, ref) {
-    const neonLinesRef = useRef<THREE.Mesh>(null!);
-    const hologramRef = useRef<THREE.Mesh>(null!);
+    const neonLinesRef = useRef<any>(null);
+    const hologramRef = useRef<any>(null);
 
     useImperativeHandle(ref, () => [neonLinesRef.current, hologramRef.current]);
 

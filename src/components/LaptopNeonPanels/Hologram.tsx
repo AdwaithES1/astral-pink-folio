@@ -1,7 +1,8 @@
 
 import React, { forwardRef } from "react";
+import { meshStandardMaterial } from "@react-three/fiber";
 
-const Hologram = forwardRef<THREE.Mesh, {}>(function Hologram(_, ref) {
+const Hologram = forwardRef<any, {}>(function Hologram(_, ref) {
   return (
     <mesh
       ref={ref}
@@ -9,15 +10,15 @@ const Hologram = forwardRef<THREE.Mesh, {}>(function Hologram(_, ref) {
       rotation={[-0.41, 0, -0.18]}
     >
       <planeGeometry args={[0.33, 0.45]} />
-      <meshStandardMaterial
-        color="#fff"
-        roughness={0.28}
-        metalness={0.0}
-        transparent
-        opacity={0.21}
-        emissive="#ff3796"
-        emissiveIntensity={0.16}
-      />
+      {React.createElement(meshStandardMaterial, {
+        color: "#fff",
+        roughness: 0.28,
+        metalness: 0.0,
+        transparent: true,
+        opacity: 0.21,
+        emissive: "#ff3796",
+        emissiveIntensity: 0.16
+      })}
     </mesh>
   );
 });

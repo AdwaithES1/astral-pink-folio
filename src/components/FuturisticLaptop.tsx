@@ -10,8 +10,8 @@ import LaptopLights from "./LaptopLights";
 
 function FuturisticLaptop() {
   // Animate device "power waves" and hologram
-  const neonLinesRef = useRef<THREE.Mesh>(null!);
-  const powerHoloRef = useRef<THREE.Mesh>(null!);
+  const neonLinesRef = useRef<any>(null);
+  const powerHoloRef = useRef<any>(null);
 
   useFrame(({ clock }) => {
     // Animate hologram panel
@@ -19,14 +19,14 @@ function FuturisticLaptop() {
       const t = clock.getElapsedTime();
       powerHoloRef.current.position.y = 0.85 + Math.sin(t * 2.4) * 0.09;
       (
-        powerHoloRef.current.material as THREE.MeshStandardMaterial
+        powerHoloRef.current.material
       ).opacity = 0.25 + 0.12 * Math.sin(t * 2.2 + 0.7);
     }
     // Subtle shimmer for neon lines
     if (neonLinesRef.current) {
       const t = clock.getElapsedTime();
       (
-        neonLinesRef.current.material as THREE.MeshBasicMaterial
+        neonLinesRef.current.material
       ).opacity = 0.32 + 0.13 * Math.sin(t * 3.1);
     }
   });

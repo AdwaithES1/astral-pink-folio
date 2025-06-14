@@ -8,10 +8,10 @@ import FlickerMiniHolo from "./LaptopNeonPanels/FlickerMiniHolo";
 /**
  * Ref forwarding: exposes [neonLinesRef, hologramRef] as array to parent.
  */
-export const LaptopNeonPanels = forwardRef<[THREE.Mesh, THREE.Mesh], {}>(
+export const LaptopNeonPanels = forwardRef<[any, any], {}>(
   function LaptopNeonPanels(props, ref) {
-    const neonLinesRef = useRef<THREE.Mesh>(null!);
-    const hologramRef = useRef<THREE.Mesh>(null!);
+    const neonLinesRef = useRef<any>(null);
+    const hologramRef = useRef<any>(null);
 
     useImperativeHandle(ref, () => [neonLinesRef.current, hologramRef.current]);
 
