@@ -1,4 +1,3 @@
-
 import { Home, FileText, Mail } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -65,10 +64,14 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
               transition: "all 0.52s cubic-bezier(0.29,1.44,0.53,1.02)",
             }}
           >
-            <div className="font-bebas text-2xl sm:text-3xl tracking-wider gradient-text-strong uppercase leading-none mb-0.5">
+            <div
+              className="navbar-brand-adwaith text-2xl sm:text-3xl gradient-text-strong uppercase leading-none mb-0.5"
+            >
               PORTFOLIO
             </div>
-            <div className="font-bebas text-5xl sm:text-6xl tracking-[0.18em] text-white mt-0 uppercase leading-none">
+            <div
+              className="navbar-brand-adwaith text-5xl sm:text-6xl text-white mt-0 uppercase leading-none"
+            >
               ADWAITH
             </div>
           </div>
@@ -79,10 +82,11 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
         <div className="flex items-center justify-between px-8 py-2 max-w-7xl mx-auto h-[70px]">
           <span
             className={cn(
-              "text-3xl sm:text-4xl font-bebas text-white tracking-[0.11em] select-none uppercase transition-transform duration-[400ms] ",
-              "scale-100 opacity-100"
+              "navbar-brand-adwaith text-3xl sm:text-4xl text-white select-none uppercase transition-transform duration-[400ms] scale-100 opacity-100"
             )}
-            style={{ transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)" }}
+            style={{
+              transition: "all 0.41s cubic-bezier(0.27,1.41,0.7,1.05)"
+            }}
           >
             ADWAITH
           </span>
@@ -127,8 +131,8 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
           background: linear-gradient(92deg, #ff3796 12%, #ff90e8 48%, #1e3a8a 80%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-                  background-clip: text;
-                  color: transparent;
+          background-clip: text;
+          color: transparent;
           font-weight: 900;
           letter-spacing: 0.03em;
         }
@@ -138,4 +142,3 @@ const NavBar = ({ burstAnim = false }: NavBarProps) => {
 };
 
 export default NavBar;
-
