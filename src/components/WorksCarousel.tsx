@@ -258,8 +258,8 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           position: "absolute",
           left: 0,
           bottom: 0,
-          paddingLeft: '12px',
-          paddingBottom: '34px',
+          paddingLeft: '3px',
+          paddingBottom: '3px',
           zIndex: 50
         }}
       >
