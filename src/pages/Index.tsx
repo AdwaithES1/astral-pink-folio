@@ -1,9 +1,11 @@
+
 import React from "react";
 import NavBar from "@/components/NavBar";
 import Main3DLaptop from "@/components/3DLaptop";
 import Section from "@/components/Section";
 import { useEffect, useState } from "react";
 import PopInOnView from "@/components/PopInOnView";
+import WorksCarousel from "@/components/WorksCarousel";
 import { Instagram, Linkedin, Mail, Github } from "lucide-react";
 
 // Placeholder image URLs
@@ -67,12 +69,7 @@ const Index = () => {
             <div className="flex flex-col w-full relative">
               {/* New: Pop-out WorksCarousel */}
               <div className="flex flex-col items-center justify-center w-full">
-                {/* Import and use our carousel */}
-                {/*
-                  NOTE: The direct import below is for this file only! In real code, import at top.
-                */}
-                {/* @ts-ignore */}
-                {React.createElement(require("@/components/WorksCarousel").default, { works })}
+                <WorksCarousel works={works} />
               </div>
               {/* Github link bottom right, with "more at" label (desktop only!) */}
               <div className="absolute right-0 flex-row items-center gap-2 hidden sm:flex" style={{ bottom: -60 }}>
@@ -192,3 +189,4 @@ const Index = () => {
 };
 
 export default Index;
+
