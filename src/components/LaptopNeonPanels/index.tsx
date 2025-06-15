@@ -12,7 +12,7 @@ export const LaptopNeonPanels = forwardRef<[any, any], {}>(
     const neonLinesRef = useRef<any>(null);
     const hologramRef = useRef<any>(null);
 
-    useImperativeHandle(ref, () => [neonLinesRef.current, hologramRef.current]);
+    useImperativeHandle(ref, () => [neonLinesRef.current, hologramRef.current] as [any, any]);
 
     return (
       <group>

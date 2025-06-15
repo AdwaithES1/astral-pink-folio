@@ -10,13 +10,16 @@ const Hologram = forwardRef<any, {}>(function Hologram(_, ref) {
     >
       <planeGeometry args={[0.33, 0.45]} />
       <meshStandardMaterial
-        color="#fff"
-        roughness={0.28}
-        metalness={0.0}
-        transparent
-        opacity={0.21}
-        emissive="#ff3796"
-        emissiveIntensity={0.16}
+        attach="material"
+        args={[{
+          color: "#fff",
+          roughness: 0.28,
+          metalness: 0.0,
+          transparent: true,
+          opacity: 0.21,
+          emissive: "#ff3796",
+          emissiveIntensity: 0.16,
+        }]}
       />
     </mesh>
   );
