@@ -141,11 +141,12 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-3xl"
+      className="relative w-full max-w-3xl mx-auto"
+      style={{ minHeight: 370 }}
     >
-      {/* Arrow left */}
+      {/* Navigation arrows OUTSIDE the carousel "column" in margin */}
       <button
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
+        className="absolute -left-16 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto lg:-left-20"
         style={{ boxShadow: "0 2px 15px #000a" }}
         aria-label="Previous"
         onClick={handlePrev}
@@ -157,10 +158,23 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           </g>
         </svg>
       </button>
+      <button
+        className="absolute -right-16 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto lg:-right-20"
+        style={{ boxShadow: "0 2px 15px #000a" }}
+        aria-label="Next"
+        onClick={handleNext}
+        tabIndex={0}
+      >
+        <svg width={28} height={28}>
+          <g>
+            <path d="M11 8l5 6-5 6" stroke="#ff3796" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+          </g>
+        </svg>
+      </button>
       {/* Carousel Slides */}
       <div
         ref={innerRef}
-        className="relative mx-14 sm:mx-20 h-[320px] flex items-center justify-center overflow-visible py-4"
+        className="relative mx-0 sm:mx-12 h-[320px] flex items-center justify-center overflow-visible py-4"
         tabIndex={0}
         style={{ outline: "none" }}
       >
@@ -225,20 +239,6 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           })}
         </div>
       </div>
-      {/* Arrow right */}
-      <button
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
-        style={{ boxShadow: "0 2px 15px #000a" }}
-        aria-label="Next"
-        onClick={handleNext}
-        tabIndex={0}
-      >
-        <svg width={28} height={28}>
-          <g>
-            <path d="M11 8l5 6-5 6" stroke="#ff3796" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-          </g>
-        </svg>
-      </button>
       {/* Carousel indicators as dots below */}
       <div className="flex flex-row gap-1 mt-2 mb-0 justify-center">
         {works.map((_, idx) => (
@@ -253,8 +253,8 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           />
         ))}
       </div>
-      {/* Github link at bottom right of carousel area (desktop only) */}
-      <div className="absolute bottom-3 right-0 flex-row items-center gap-2 hidden sm:flex">
+      {/* Github link at bottom right of carousel area (always visible, on top of main container) */}
+      <div className="absolute bottom-1 right-0 flex-row items-center gap-2 hidden sm:flex z-40 pr-2">
         <span
           className="font-caveat text-2xl sm:text-2xl text-white opacity-80 mr-2 select-none"
           style={{
@@ -279,8 +279,8 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           My Github
         </a>
       </div>
-      {/* Github link and "more at" (visible on mobile, below indicators) */}
-      <div className="flex flex-row items-center gap-2 mt-4 justify-center sm:hidden">
+      {/* Github link and "more at" (visible on mobile, bottom right using absolute) */}
+      <div className="absolute bottom-1 right-2 flex flex-row items-center gap-2 mt-4 justify-end sm:hidden z-40">
         <span
           className="font-caveat text-xl text-white opacity-80 mr-2 select-none"
           style={{
@@ -311,5 +311,5 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
 
 export default WorksCarousel;
 
-// The file is reaching a large size (over 255 lines). 
+// The file is reaching a large size (over 320 lines).
 // Consider asking me to refactor this file into smaller components after you review the changes!
