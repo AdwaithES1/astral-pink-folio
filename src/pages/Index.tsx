@@ -64,31 +64,14 @@ const Index = () => {
         <Section id="works" title="Works">
           <PopInOnView thresholdClass="animate-soft-pop-in">
             <div className="flex flex-col w-full relative">
-              {/* Sub-columns for projects */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 justify-center mt-4 mx-auto w-full">
-                {works.map((work, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-black/60 rounded-xl border border-zinc-700 shadow-lg px-3 py-5 flex flex-row items-center max-w-xs w-full mx-auto min-h-[140px]"
-                  >
-                    <div className="w-16 h-16 bg-zinc-900 rounded-lg overflow-hidden flex items-center justify-center mr-4 shrink-0">
-                      <img
-                        src={work.image}
-                        alt={work.name}
-                        className="w-full h-full object-cover"
-                        style={{ aspectRatio: "1/1" }}
-                      />
-                    </div>
-                    <div className="flex flex-col justify-center">
-                      <h3 className="font-bold text-xl text-white mb-1 font-sans">
-                        {work.name}
-                      </h3>
-                      <p className="text-zinc-300 text-sm max-w-[180px] font-sans">
-                        {work.desc.substring(0, 200)}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+              {/* New: Pop-out WorksCarousel */}
+              <div className="flex flex-col items-center justify-center w-full">
+                {/* Import and use our carousel */}
+                {/*
+                  NOTE: The direct import below is for this file only! In real code, import at top.
+                */}
+                {/* @ts-ignore */}
+                {React.createElement(require("@/components/WorksCarousel").default, { works })}
               </div>
               {/* Github link bottom right, with "more at" label (desktop only!) */}
               <div className="absolute right-0 flex-row items-center gap-2 hidden sm:flex" style={{ bottom: -60 }}>
@@ -108,7 +91,11 @@ const Index = () => {
                   className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-4 py-2 rounded-xl shadow-md transition-all"
                   style={{ boxShadow: "0 3px 12px #0007" }}
                 >
-                  <Github size={20} className="mr-2 group-hover:scale-110 transition" />
+                  <svg width={20} height={20}>
+                    <g>
+                      <path d="M12 18c8-2.5 7.1-11.5.5-10.8-2-1.1.3-2.1.7-4C7 2.8 4.1 3.6 2.6 5.4c-2.1 3 .1 7.2 3.4 8.2 2.5-.6 5.8.8 6 1.3z" fill="currentColor"/>
+                    </g>
+                  </svg>
                   My Github
                 </a>
               </div>
@@ -130,7 +117,11 @@ const Index = () => {
                   className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-3 py-2 rounded-xl shadow-md transition-all"
                   style={{ boxShadow: "0 2px 8px #0007" }}
                 >
-                  <Github size={18} className="mr-2 group-hover:scale-110 transition" />
+                  <svg width={18} height={18}>
+                    <g>
+                      <path d="M11 16c8-2.5 7.1-11.5.5-10.8-2-1.1.3-2.1.7-4C6 0.8 3.1 1.6 1.6 3.4c-2.1 3 .1 7.2 3.4 8.2 2.5-.6 5.8.8 6 1.3z" fill="currentColor"/>
+                    </g>
+                  </svg>
                   My Github
                 </a>
               </div>
