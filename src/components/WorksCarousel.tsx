@@ -138,16 +138,12 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
   const handleNext = () => setSelected((prev) => (prev + 1) % total);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full max-w-3xl mx-auto"
-      style={{ minHeight: 370 }}
-    >
-      {/* NAVIGATION ARROWS - Move even further to the side in the white space area */}
+    <div className="relative w-full max-w-3xl mx-auto" style={{ minHeight: 370 }}>
+      {/* NAVIGATION ARROWS - Even further into the side margin (outside cards/column) */}
       <button
-        className="absolute z-40 top-1/2 -translate-y-1/2 left-[-90px] md:left-[-120px] bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
+        className="absolute z-40 top-1/2 -translate-y-1/2 left-[-110px] md:left-[-160px] bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
         style={{
-          boxShadow: "0 2px 15px #000a",
+          boxShadow: "0 2px 15px #000a"
         }}
         aria-label="Previous"
         onClick={handlePrev}
@@ -160,9 +156,9 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
         </svg>
       </button>
       <button
-        className="absolute z-40 top-1/2 -translate-y-1/2 right-[-90px] md:right-[-120px] bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
+        className="absolute z-40 top-1/2 -translate-y-1/2 right-[-110px] md:right-[-160px] bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
         style={{
-          boxShadow: "0 2px 15px #000a",
+          boxShadow: "0 2px 15px #000a"
         }}
         aria-label="Next"
         onClick={handleNext}
@@ -256,42 +252,56 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           />
         ))}
       </div>
-      {/* Github link at bottom right INSIDE the carousel column */}
-      <div className="absolute z-50 flex flex-row items-center gap-2 bg-transparent"
-        style={{
-          bottom: "12px",
-          right: "12px", // absolute to carousel boundary, not outside
-        }}
-      >
-        <span
-          className="font-caveat text-xl sm:text-2xl text-white opacity-80 mr-2 select-none"
-          style={{
-            fontFamily: "'Caveat', cursive",
-            letterSpacing: "0.01em"
-          }}
-        >
-          more at
-        </span>
-        <a
-          href="https://github.com/yourgithub"
-          target="_blank"
-          rel="noopener"
-          className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-3 sm:px-4 py-2 rounded-xl shadow-md transition-all"
-          style={{ boxShadow: "0 2px 8px #0007" }}
-        >
-          <svg width={18} height={18}>
-            <g>
-              <path d="M11 16c8-2.5 7.1-11.5.5-10.8-2-1.1.3-2.1.7-4C6 0.8 3.1 1.6 1.6 3.4c-2.1 3 .1 7.2 3.4 8.2 2.5-.6 5.8.8 6 1.3z" fill="currentColor"/>
-            </g>
-          </svg>
-          My Github
-        </a>
-      </div>
+      {/* No GitHub link here anymore */}
     </div>
   );
 };
 
-export default WorksCarousel;
+// Move GitHub/"more at" link OUTSIDE carousel, and absolutely pin to column edge
+const WorksCarouselWithFooter: React.FC<WorksCarouselProps> = (props) => (
+  <div className="relative w-full flex flex-col items-center">
+    {/* The carousel itself */}
+    <WorksCarousel {...props} />
+    {/* The absolutely positioned GitHub link at the bottom right of the column */}
+    <div
+      className="absolute z-50 flex flex-row items-center gap-2 bg-transparent"
+      style={{
+        bottom: 0, // touch the bottom of the column/container
+        right: 0, // flush to the right of the column
+        paddingBottom: 10,
+        paddingRight: 10,
+      }}
+    >
+      <span
+        className="font-caveat text-xl sm:text-2xl text-white opacity-80 mr-2 select-none"
+        style={{
+          fontFamily: "'Caveat', cursive",
+          letterSpacing: "0.01em"
+        }}
+      >
+        more at
+      </span>
+      <a
+        href="https://github.com/yourgithub"
+        target="_blank"
+        rel="noopener"
+        className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-3 sm:px-4 py-2 rounded-xl shadow-md transition-all"
+        style={{ boxShadow: "0 2px 8px #0007" }}
+      >
+        <svg width={18} height={18}>
+          <g>
+            <path d="M11 16c8-2.5 7.1-11.5.5-10.8-2-1.1.3-2.1.7-4C6 0.8 3.1 1.6 1.6 3.4c-2.1 3 .1 7.2 3.4 8.2 2.5-.6 5.8.8 6 1.3z" fill="currentColor"/>
+          </g>
+        </svg>
+        My Github
+      </a>
+    </div>
+  </div>
+);
+
+// Export new wrapper instead
+export default WorksCarouselWithFooter;
 
 // This file is reaching a large size (>320 lines).
 // Consider asking to refactor this file into smaller components for maintainability!
+
