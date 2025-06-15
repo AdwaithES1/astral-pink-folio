@@ -138,7 +138,7 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
 
   return (
     <div className="relative w-full max-w-3xl mx-auto" style={{ minHeight: 370 }}>
-      {/* NAVIGATION ARROWS - Even further into the side margin (outside cards/column) */}
+      {/* NAVIGATION ARROWS */}
       <button
         className="absolute z-40 top-1/2 -translate-y-1/2 left-[-110px] md:left-[-160px] bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
         style={{
@@ -251,7 +251,35 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           />
         ))}
       </div>
-      {/* No GitHub link here anymore */}
+      {/* Bottom-right GitHub link and more at label */}
+      <div
+        className="absolute flex flex-row items-center gap-2"
+        style={{
+          right: 0,
+          bottom: 0,
+          paddingRight: '10px',
+          paddingBottom: '10px',
+        }}
+      >
+        <span
+          className="font-caveat text-xl sm:text-2xl text-white opacity-80 select-none"
+          style={{
+            fontFamily: "'Caveat', cursive",
+            letterSpacing: "0.01em",
+          }}
+        >
+          more at
+        </span>
+        <a
+          href="#"
+          aria-label="GitHub"
+          target="_blank"
+          rel="noopener"
+          className="flex flex-row items-center text-zinc-400 hover:text-electric-pink transition"
+        >
+          <Github size={30} />
+        </a>
+      </div>
     </div>
   );
 };
