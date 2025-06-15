@@ -64,8 +64,9 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
   const [selected, setSelected] = React.useState(0);
   const total = works.length;
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const innerRef = React.useRef<HTMLDivElement>(null);
 
-  // Keyboard arrow navigation
+  // Keyboard arrow navigation (same as before)
   React.useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") setSelected(prev => (prev - 1 + total) % total);
@@ -75,35 +76,36 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
     return () => window.removeEventListener("keydown", handler);
   }, [total]);
 
-  // Scroll navigation (wheel)
+  // Only enable scroll navigation when pointer is over carousel
   React.useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      if (!containerRef.current) return;
-      if (document.activeElement && !containerRef.current.contains(document.activeElement as Node)) {
-        // only scroll if not focused on an input etc
-        return;
-      }
+      if (!innerRef.current) return;
+      // Only trigger if wheel is on the carousel (inner div)
+      if (!innerRef.current.contains(e.target as Node)) return;
+      e.preventDefault();
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        // Vertical scrolling (deltaY), using only if relatively straight (prevent horizontal scroll gesture)
         const threshold = 28;
-        if (e.deltaY > threshold) setSelected((prev) => (prev + 1) % total);
-        if (e.deltaY < -threshold) setSelected((prev) => (prev - 1 + total) % total);
+        if (e.deltaY > threshold)
+          setSelected(prev => (prev + 1) % total);
+        if (e.deltaY < -threshold)
+          setSelected(prev => (prev - 1 + total) % total);
       } else if (Math.abs(e.deltaX) > 12) {
-        // allow horizontal scroll wheel as well
-        if (e.deltaX > 0) setSelected((prev) => (prev + 1) % total);
-        if (e.deltaX < 0) setSelected((prev) => (prev - 1 + total) % total);
+        if (e.deltaX > 0)
+          setSelected(prev => (prev + 1) % total);
+        if (e.deltaX < 0)
+          setSelected(prev => (prev - 1 + total) % total);
       }
     };
-    const refCurrent = containerRef.current;
-    if (refCurrent) {
-      refCurrent.addEventListener("wheel", handleWheel, { passive: false });
+    const target = innerRef.current;
+    if (target) {
+      target.addEventListener("wheel", handleWheel, { passive: false });
     }
     return () => {
-      if (refCurrent) refCurrent.removeEventListener("wheel", handleWheel);
+      if (target) target.removeEventListener("wheel", handleWheel);
     };
   }, [total]);
 
-  // Touch swipe navigation for mobile
+  // Touch swipe navigation for mobile (same as before)
   React.useEffect(() => {
     let startX = 0;
     let dragging = false;
@@ -120,7 +122,7 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
       if (dx < -threshold) setSelected((prev) => (prev + 1) % total);
       dragging = false;
     };
-    const target = containerRef.current;
+    const target = innerRef.current;
     if (target) {
       target.addEventListener("touchstart", handleTouchStart);
       target.addEventListener("touchend", handleTouchEnd);
@@ -139,12 +141,29 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
   return (
     <div
       ref={containerRef}
-      className="relative flex flex-col items-center w-full"
-      tabIndex={0}
-      style={{ outline: "none" }}
+      className="relative w-full max-w-3xl"
     >
-      <div className="relative w-full max-w-3xl h-[304px] sm:h-[308px] flex items-center justify-center overflow-visible py-4">
-        {/* 3D carousel */}
+      {/* Arrow left */}
+      <button
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
+        style={{ boxShadow: "0 2px 15px #000a" }}
+        aria-label="Previous"
+        onClick={handlePrev}
+        tabIndex={0}
+      >
+        <svg width={28} height={28}>
+          <g>
+            <path d="M17 8l-5 6 5 6" stroke="#ff3796" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+          </g>
+        </svg>
+      </button>
+      {/* Carousel Slides */}
+      <div
+        ref={innerRef}
+        className="relative mx-14 sm:mx-20 h-[320px] flex items-center justify-center overflow-visible py-4"
+        tabIndex={0}
+        style={{ outline: "none" }}
+      >
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ perspective: 1200 }}>
           {works.map((work, idx) => {
             const { style, active } = get3DTransforms(idx, selected, total);
@@ -205,36 +224,23 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
             );
           })}
         </div>
-        {/* Nav arrows, desktop/ mobile always bottom center */}
-        <button
-          className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
-          style={{ boxShadow: "0 2px 15px #000a" }}
-          aria-label="Previous"
-          onClick={handlePrev}
-          tabIndex={0}
-        >
-          <svg width={28} height={28}>
-            <g>
-              <path d="M17 8l-5 6 5 6" stroke="#ff3796" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-            </g>
-          </svg>
-        </button>
-        <button
-          className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
-          style={{ boxShadow: "0 2px 15px #000a" }}
-          aria-label="Next"
-          onClick={handleNext}
-          tabIndex={0}
-        >
-          <svg width={28} height={28}>
-            <g>
-              <path d="M11 8l5 6-5 6" stroke="#ff3796" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-            </g>
-          </svg>
-        </button>
       </div>
+      {/* Arrow right */}
+      <button
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
+        style={{ boxShadow: "0 2px 15px #000a" }}
+        aria-label="Next"
+        onClick={handleNext}
+        tabIndex={0}
+      >
+        <svg width={28} height={28}>
+          <g>
+            <path d="M11 8l5 6-5 6" stroke="#ff3796" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+          </g>
+        </svg>
+      </button>
       {/* Carousel indicators as dots below */}
-      <div className="flex flex-row gap-1 mt-2 mb-0">
+      <div className="flex flex-row gap-1 mt-2 mb-0 justify-center">
         {works.map((_, idx) => (
           <div
             key={idx}
@@ -247,8 +253,63 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           />
         ))}
       </div>
+      {/* Github link at bottom right of carousel area (desktop only) */}
+      <div className="absolute bottom-3 right-0 flex-row items-center gap-2 hidden sm:flex">
+        <span
+          className="font-caveat text-2xl sm:text-2xl text-white opacity-80 mr-2 select-none"
+          style={{
+            fontFamily: "'Caveat', cursive",
+            letterSpacing: "0.01em"
+          }}
+        >
+          more at
+        </span>
+        <a
+          href="https://github.com/yourgithub"
+          target="_blank"
+          rel="noopener"
+          className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-4 py-2 rounded-xl shadow-md transition-all"
+          style={{ boxShadow: "0 3px 12px #0007" }}
+        >
+          <svg width={20} height={20}>
+            <g>
+              <path d="M12 18c8-2.5 7.1-11.5.5-10.8-2-1.1.3-2.1.7-4C7 2.8 4.1 3.6 2.6 5.4c-2.1 3 .1 7.2 3.4 8.2 2.5-.6 5.8.8 6 1.3z" fill="currentColor"/>
+            </g>
+          </svg>
+          My Github
+        </a>
+      </div>
+      {/* Github link and "more at" (visible on mobile, below indicators) */}
+      <div className="flex flex-row items-center gap-2 mt-4 justify-center sm:hidden">
+        <span
+          className="font-caveat text-xl text-white opacity-80 mr-2 select-none"
+          style={{
+            fontFamily: "'Caveat', cursive",
+            letterSpacing: "0.01em"
+          }}
+        >
+          more at
+        </span>
+        <a
+          href="https://github.com/yourgithub"
+          target="_blank"
+          rel="noopener"
+          className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-3 py-2 rounded-xl shadow-md transition-all"
+          style={{ boxShadow: "0 2px 8px #0007" }}
+        >
+          <svg width={18} height={18}>
+            <g>
+              <path d="M11 16c8-2.5 7.1-11.5.5-10.8-2-1.1.3-2.1.7-4C6 0.8 3.1 1.6 1.6 3.4c-2.1 3 .1 7.2 3.4 8.2 2.5-.6 5.8.8 6 1.3z" fill="currentColor"/>
+            </g>
+          </svg>
+          My Github
+        </a>
+      </div>
     </div>
   );
 };
 
 export default WorksCarousel;
+
+// The file is reaching a large size (over 255 lines). 
+// Consider asking me to refactor this file into smaller components after you review the changes!

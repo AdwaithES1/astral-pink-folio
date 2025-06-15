@@ -1,4 +1,3 @@
-
 import React from "react";
 import NavBar from "@/components/NavBar";
 import Main3DLaptop from "@/components/3DLaptop";
@@ -66,62 +65,12 @@ const Index = () => {
       <main className="w-full max-w-5xl mx-auto">
         <Section id="works" title="Works">
           <PopInOnView thresholdClass="animate-soft-pop-in">
-            <div className="flex flex-col w-full relative">
-              {/* New: Pop-out WorksCarousel */}
-              <div className="flex flex-col items-center justify-center w-full">
+            {/* Move title above and tighten gap */}
+            <div className="flex flex-col w-full items-center">
+              {/* Statically move the Works title up in Section with custom margin */}
+              <div className="mb-6" />
+              <div className="w-full flex flex-col items-center justify-center relative">
                 <WorksCarousel works={works} />
-              </div>
-              {/* Github link bottom right, with "more at" label (desktop only!) */}
-              <div className="absolute right-0 flex-row items-center gap-2 hidden sm:flex" style={{ bottom: -60 }}>
-                <span
-                  className="font-caveat text-2xl sm:text-2xl text-white opacity-80 mr-2 select-none"
-                  style={{
-                    fontFamily: "'Caveat', cursive",
-                    letterSpacing: "0.01em"
-                  }}
-                >
-                  more at
-                </span>
-                <a
-                  href="https://github.com/yourgithub"
-                  target="_blank"
-                  rel="noopener"
-                  className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-4 py-2 rounded-xl shadow-md transition-all"
-                  style={{ boxShadow: "0 3px 12px #0007" }}
-                >
-                  <svg width={20} height={20}>
-                    <g>
-                      <path d="M12 18c8-2.5 7.1-11.5.5-10.8-2-1.1.3-2.1.7-4C7 2.8 4.1 3.6 2.6 5.4c-2.1 3 .1 7.2 3.4 8.2 2.5-.6 5.8.8 6 1.3z" fill="currentColor"/>
-                    </g>
-                  </svg>
-                  My Github
-                </a>
-              </div>
-              {/* Github link and "more at" (only visible on mobile) */}
-              <div className="flex flex-row items-center gap-2 mt-6 justify-center sm:hidden">
-                <span
-                  className="font-caveat text-xl text-white opacity-80 mr-2 select-none"
-                  style={{
-                    fontFamily: "'Caveat', cursive",
-                    letterSpacing: "0.01em"
-                  }}
-                >
-                  more at
-                </span>
-                <a
-                  href="https://github.com/yourgithub"
-                  target="_blank"
-                  rel="noopener"
-                  className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-3 py-2 rounded-xl shadow-md transition-all"
-                  style={{ boxShadow: "0 2px 8px #0007" }}
-                >
-                  <svg width={18} height={18}>
-                    <g>
-                      <path d="M11 16c8-2.5 7.1-11.5.5-10.8-2-1.1.3-2.1.7-4C6 0.8 3.1 1.6 1.6 3.4c-2.1 3 .1 7.2 3.4 8.2 2.5-.6 5.8.8 6 1.3z" fill="currentColor"/>
-                    </g>
-                  </svg>
-                  My Github
-                </a>
               </div>
             </div>
           </PopInOnView>
@@ -189,4 +138,3 @@ const Index = () => {
 };
 
 export default Index;
-
