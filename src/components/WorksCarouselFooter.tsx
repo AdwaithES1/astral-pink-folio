@@ -10,16 +10,15 @@ const WorksCarouselFooter: React.FC<WorksCarouselFooterProps> = ({
   githubUrl = "#",
 }) => (
   <div
-    className="absolute bottom-0 right-0 w-full flex flex-row justify-end items-end gap-2 z-50"
+    className="absolute bottom-0 right-[5px] flex flex-row items-end gap-2 z-50"
     style={{
-      paddingRight: "18px", // Moved 5px further right than before (now just 5px from border)
       paddingBottom: "2px", // Sits just above the border
       marginRight: 0,
       marginBottom: 0,
       pointerEvents: "auto",
     }}
   >
-    <div className="flex flex-row items-center gap-2 pr-2 pb-0">
+    <div className="flex flex-row items-center gap-2 pr-1 pb-0">
       <span
         className="font-caveat text-xl sm:text-2xl text-white opacity-80 select-none"
         style={{
