@@ -251,14 +251,14 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           />
         ))}
       </div>
-      {/* Bottom-right GitHub link and "more at" label firmly anchored */}
+      {/* BOTTOM-LEFT GITHUB LINK */}
       <div
         className="flex flex-row items-center gap-2"
         style={{
           position: "absolute",
-          right: 0,
+          left: 0,
           bottom: 0,
-          paddingRight: '12px',
+          paddingLeft: '12px',
           paddingBottom: '34px',
           zIndex: 50
         }}
@@ -282,6 +282,7 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           <Github size={30} />
         </a>
       </div>
+      {/* END BOTTOM-LEFT GITHUB LINK */}
     </div>
   );
 };
