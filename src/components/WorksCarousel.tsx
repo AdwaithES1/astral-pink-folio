@@ -54,7 +54,7 @@ const get3DTransforms = (idx: number, selected: number, total: number) => {
       zIndex: 0,
       opacity: 0.16,
       filter: "brightness(0.35) blur(3.5px)",
-      display: "none", // hidden unless on large screen
+      display: "none",
     },
     active: false,
   };
@@ -80,7 +80,6 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
   React.useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       if (!innerRef.current) return;
-      // Only trigger if wheel is on the carousel (inner div)
       if (!innerRef.current.contains(e.target as Node)) return;
       e.preventDefault();
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
@@ -144,10 +143,12 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
       className="relative w-full max-w-3xl mx-auto"
       style={{ minHeight: 370 }}
     >
-      {/* Navigation arrows OUTSIDE the carousel "column" in margin */}
+      {/* NAVIGATION ARROWS - margin OUTSIDE carousel area on both sides, centered vertically across full height, never inside cards/blur */}
       <button
-        className="absolute -left-16 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto lg:-left-20"
-        style={{ boxShadow: "0 2px 15px #000a" }}
+        className="absolute z-40 top-1/2 -translate-y-1/2 left-[-60px] md:left-[-80px] bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
+        style={{
+          boxShadow: "0 2px 15px #000a",
+        }}
         aria-label="Previous"
         onClick={handlePrev}
         tabIndex={0}
@@ -159,8 +160,10 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
         </svg>
       </button>
       <button
-        className="absolute -right-16 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto lg:-right-20"
-        style={{ boxShadow: "0 2px 15px #000a" }}
+        className="absolute z-40 top-1/2 -translate-y-1/2 right-[-60px] md:right-[-80px] bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
+        style={{
+          boxShadow: "0 2px 15px #000a",
+        }}
         aria-label="Next"
         onClick={handleNext}
         tabIndex={0}
@@ -240,7 +243,7 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
         </div>
       </div>
       {/* Carousel indicators as dots below */}
-      <div className="flex flex-row gap-1 mt-2 mb-0 justify-center">
+      <div className="flex flex-row gap-1 mt-2 mb-0 justify-center z-10">
         {works.map((_, idx) => (
           <div
             key={idx}
@@ -253,10 +256,10 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           />
         ))}
       </div>
-      {/* Github link at bottom right of carousel area (always visible, on top of main container) */}
-      <div className="absolute bottom-1 right-0 flex-row items-center gap-2 hidden sm:flex z-40 pr-2">
+      {/* Github link at true bottom right, always absolute, always visible on top */}
+      <div className="absolute bottom-2 right-2 flex flex-row items-center gap-2 z-50 bg-transparent">
         <span
-          className="font-caveat text-2xl sm:text-2xl text-white opacity-80 mr-2 select-none"
+          className="font-caveat text-xl sm:text-2xl text-white opacity-80 mr-2 select-none"
           style={{
             fontFamily: "'Caveat', cursive",
             letterSpacing: "0.01em"
@@ -268,33 +271,7 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           href="https://github.com/yourgithub"
           target="_blank"
           rel="noopener"
-          className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-4 py-2 rounded-xl shadow-md transition-all"
-          style={{ boxShadow: "0 3px 12px #0007" }}
-        >
-          <svg width={20} height={20}>
-            <g>
-              <path d="M12 18c8-2.5 7.1-11.5.5-10.8-2-1.1.3-2.1.7-4C7 2.8 4.1 3.6 2.6 5.4c-2.1 3 .1 7.2 3.4 8.2 2.5-.6 5.8.8 6 1.3z" fill="currentColor"/>
-            </g>
-          </svg>
-          My Github
-        </a>
-      </div>
-      {/* Github link and "more at" (visible on mobile, bottom right using absolute) */}
-      <div className="absolute bottom-1 right-2 flex flex-row items-center gap-2 mt-4 justify-end sm:hidden z-40">
-        <span
-          className="font-caveat text-xl text-white opacity-80 mr-2 select-none"
-          style={{
-            fontFamily: "'Caveat', cursive",
-            letterSpacing: "0.01em"
-          }}
-        >
-          more at
-        </span>
-        <a
-          href="https://github.com/yourgithub"
-          target="_blank"
-          rel="noopener"
-          className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-3 py-2 rounded-xl shadow-md transition-all"
+          className="flex flex-row items-center gap-1 text-zinc-400 hover:text-electric-pink font-medium group border border-zinc-800 bg-black/70 px-3 sm:px-4 py-2 rounded-xl shadow-md transition-all"
           style={{ boxShadow: "0 2px 8px #0007" }}
         >
           <svg width={18} height={18}>
