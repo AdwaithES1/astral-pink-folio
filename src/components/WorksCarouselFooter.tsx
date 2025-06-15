@@ -12,7 +12,7 @@ const WorksCarouselFooter: React.FC<WorksCarouselFooterProps> = ({
   <div
     className="absolute bottom-0 right-0 w-full flex flex-row justify-end items-end gap-2 z-50"
     style={{
-      paddingRight: "8px", // Moved 5px further right
+      paddingRight: "13px", // Moved 5px further right than before
       paddingBottom: "2px", // Sits just above the border
       marginRight: 0,
       marginBottom: 0,
@@ -43,4 +43,3 @@ const WorksCarouselFooter: React.FC<WorksCarouselFooterProps> = ({
 );
 
 export default WorksCarouselFooter;
-
