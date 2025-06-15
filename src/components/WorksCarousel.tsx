@@ -251,14 +251,16 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           />
         ))}
       </div>
-      {/* Bottom-right GitHub link and more at label */}
+      {/* Bottom-right GitHub link and "more at" label firmly anchored */}
       <div
-        className="absolute flex flex-row items-center gap-2"
+        className="flex flex-row items-center gap-2"
         style={{
+          position: "absolute",
           right: 0,
           bottom: 0,
-          paddingRight: '10px',
+          paddingRight: '12px',
           paddingBottom: '10px',
+          zIndex: 50
         }}
       >
         <span
