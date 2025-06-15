@@ -143,9 +143,9 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
       className="relative w-full max-w-3xl mx-auto"
       style={{ minHeight: 370 }}
     >
-      {/* NAVIGATION ARROWS - margin OUTSIDE carousel area on both sides, centered vertically across full height, never inside cards/blur */}
+      {/* NAVIGATION ARROWS - Move even further to the side in the white space area */}
       <button
-        className="absolute z-40 top-1/2 -translate-y-1/2 left-[-60px] md:left-[-80px] bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
+        className="absolute z-40 top-1/2 -translate-y-1/2 left-[-90px] md:left-[-120px] bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
         style={{
           boxShadow: "0 2px 15px #000a",
         }}
@@ -160,7 +160,7 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
         </svg>
       </button>
       <button
-        className="absolute z-40 top-1/2 -translate-y-1/2 right-[-60px] md:right-[-80px] bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
+        className="absolute z-40 top-1/2 -translate-y-1/2 right-[-90px] md:right-[-120px] bg-black/60 hover:bg-zinc-900 border border-zinc-700 text-pink-400 hover:text-pink-500 rounded-full p-2 shadow-md transition pointer-events-auto"
         style={{
           boxShadow: "0 2px 15px #000a",
         }}
@@ -256,8 +256,13 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
           />
         ))}
       </div>
-      {/* Github link at true bottom right, always absolute, always visible on top */}
-      <div className="absolute bottom-2 right-2 flex flex-row items-center gap-2 z-50 bg-transparent">
+      {/* Github link at bottom right INSIDE the carousel column */}
+      <div className="absolute z-50 flex flex-row items-center gap-2 bg-transparent"
+        style={{
+          bottom: "12px",
+          right: "12px", // absolute to carousel boundary, not outside
+        }}
+      >
         <span
           className="font-caveat text-xl sm:text-2xl text-white opacity-80 mr-2 select-none"
           style={{
@@ -288,5 +293,5 @@ const WorksCarousel: React.FC<WorksCarouselProps> = ({ works }) => {
 
 export default WorksCarousel;
 
-// The file is reaching a large size (over 320 lines).
-// Consider asking me to refactor this file into smaller components after you review the changes!
+// This file is reaching a large size (>320 lines).
+// Consider asking to refactor this file into smaller components for maintainability!
